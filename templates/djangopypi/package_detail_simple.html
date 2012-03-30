@@ -1,0 +1,14 @@
+<html>
+<head>
+<title>Links for {{ package.name }}</title>
+</head>
+<body>
+<h1>SimpleLinks for {{ package.name }}</h1>
+{% for release in package.releases.all %}
+{% for dist in release.distributions.all %}
+<a href="{{ dist.get_absolute_url }}">{{ dist.filename }}</a><br />{% endfor %}
+{% if release.package_info.home_page %}<a href="{{ release.package_info.home_page }}">{{ release.version }} home-page</a><br />{% endif %}
+{% if release.package_info.download_url %}<a href="{{ release.package_info.download_url }}">{{ release.version }} download-url</a><br />{% endif %}
+{% endfor %}
+</body>
+</html>

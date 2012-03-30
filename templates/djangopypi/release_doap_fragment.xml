@@ -1,0 +1,10 @@
+<release rdf:about="{{ release.get_absolute_url }}">
+	<Version>
+		<name>{{ release.package.name }}</name>
+		<created>{{ release.created|date:"Y-m-d" }}</created>
+		<revision>{{ release.version }}</revision>
+		{% for dist in release.distributions.all %}
+		<file-release rdf:resource="{{ dist.get_absolute_url }}">{{ dist.filename }}</file-release>
+		{% endfor %}
+	</Version>
+</release>

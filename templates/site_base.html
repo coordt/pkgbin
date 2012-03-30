@@ -1,0 +1,39 @@
+{% extends "base.html" %}
+{% load i18n %}
+{% block content_nav %}
+<div class="navbar navbar-fixed-top">
+  <div class="navbar-inner">
+    <div class="container">
+      <a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </a>
+      <a class="brand" href="#">PiePie</a>
+      <div class="nav-collapse">
+        <ul class="nav">
+          <li class="active"><a href="#">Home</a></li>
+          <li><a href="#about">About</a></li>
+          <li><a href="#contact">Contact</a></li>
+        </ul>
+        <ul class="nav pull-right">
+          {% if user.is_anonymous %}
+            <li><a href="{% url userena_signin %}">Sign In</a></li>
+            <li><a href="{% url userena_signup %}">Sign Up</a></li>
+          {% else %}
+            <li><a href="{% url userena_profile_edit user.username %}"><i class="icon-cog icon-white"></i>&nbsp;Edit Profile</a></li>
+            <li><a href="{% url userena_signout %}"><i class="icon-off icon-white"></i>&nbsp;Sign Out</a></li>
+          {% endif %}
+        </ul>
+      </div><!--/.nav-collapse -->
+    </div>
+  </div>
+</div>
+{% endblock %}
+{% block body %}
+{% endblock %}
+{% block footer %}
+<div class="legal container">
+    {% trans "&copy; 2012 Corey Oordt" %}
+</div>
+{% endblock %}

@@ -1,0 +1,28 @@
+<dl class="dl-horizontal">
+    {% with release.package_info as pi %}
+        {% if pi.author %}<dt>Author</dt><dd>{{ pi.author }}</dd>{% endif %}
+        {% if pi.license.count %}<dt>License</dt><dd>
+            {% if pi.license|length == 1 %}
+                {{ pi.licence.0 }}
+            {% else %}
+                <ul>{% for l in pi.license %}<li>{{ l }}</li>{% endfor %}
+            {% endif %}</dd>
+        {% endif %}
+        {% if pi.home_page %}<dt>Home Page</dt><dd><a href="{{ pi.home_page }}">{{ pi.home_page }}</a></dd>{% endif %}
+        {% if pi.download_url.count %}<dt>Download URL</dt><dd>
+            {% if pi.download_url|length == 1 %}
+                <a href="{{ pi.download_url.0 }}">{{ pi.download_url.0 }}</a>
+            {% else %}
+                <ul>{% for d in pi.download_url %}<li><a href="{{ d }}">{{ d }}</a></li>{% endfor %}</ul>
+            {% endif %}</dd>
+        {% endif %}
+        {% if pi.platform.count %}<dt>Platform</dt><dd>
+            {% if pi.platform|length == 1 %}
+                {{ pi.platform.0 }}
+            {% else %}
+                <ul>{% for p in pi.platform %}<li>{{ p }}</li>{% endfor %}
+            {% endif %}</dd>
+        {% endif %}
+        {% if pi.classifier %}<dt>Classifiers</dt><dd>{{ pi.classifier }}</dd>{% endif %}
+    {% endwith %}
+</dl>

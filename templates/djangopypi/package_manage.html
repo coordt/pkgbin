@@ -1,0 +1,24 @@
+{% extends "site_base.html" %}
+{% load bootstrap i18n %}
+{% block head_title %}Manage {{ package.name }}{% endblock %}
+{% block body %}
+        <h1>{{ package.name }} {% for r in package.releases.all %}
+<a class="label" href="{% url userpypi-release r.package.owner.username r.package.name r.version %}">{{ r.version }}</a>
+        {% endfor %}</h1>
+        <ul class="nav nav-tabs">
+            <li><a href="{% url userpypi-package request.user package.name %}#description">{% trans "Description" %}</a></li>
+            <li><a href="{% url userpypi-package request.user package.name %}#info">{% trans "Info" %}</a></li>
+            <li><a href="{% url userpypi-package request.user package.name %}#releases">{% trans "All Releases" %}</a></li>
+            {% if package.latest.distributions.count %}
+                <li><a href="{% url userpypi-package request.user package.name %}#downloads">{% trans "Downloads" %}</a></li>{% endif %}
+            {% if package.owner == request.user or request.user in package.maintainers %}
+                <li class="active"><a href="{% url userpypi-package-manage request.user package.name %}">{% trans "Manage" %}</a></li>
+            {% endif %}
+        </ul>
+	<form action="" method="post" class="form-horizontal">
+        {{ form|bootstrap }}
+        <div class="form-actions">
+            <input type="submit" class="btn btn-primary" value="{% trans "Save" %}" />
+        </div>
+
+{% endblock %}

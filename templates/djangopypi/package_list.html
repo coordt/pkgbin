@@ -1,0 +1,12 @@
+{% extends "site_base.html" %}
+{% block head_title %}Package Index{% endblock %}
+{% block body %}
+    <h2>Package Index</h2>
+    <ul>
+        {% for package in package_list %}
+        <li><a href="{% url userpypi-package username=username package=package.name %}">{{ package.name }}</a>
+            {% if package.latest and package.latest.summary %}: {{ package.latest.summary }}{% endif %}
+        </li>
+        {% endfor %}
+    </ul>
+{% endblock %}

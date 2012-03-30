@@ -1,0 +1,57 @@
+{% extends "site_base.html" %}
+{% load i18n %}
+{% block head_title %}{{ package.name }}{% endblock %}
+{% block extra_head %}
+    <link rel="stylesheet" href="{{ STATIC_URL }}css/rstbody.css" type="text/css" media="screen">
+    <link rel="meta" title="DOAP" type="application/rdf+xml" href="{% url userpypi-package-doap username=username package=package.name %}"/> 
+{% endblock %}
+{% block body %}
+        <h1>{{ package.name }} {% for r in package.releases.all %}
+<a class="label" href="{% url userpypi-release username r.package.name r.version %}">{{ r.version }}</a>
+        {% endfor %}</h1>
+        user {{ username }}
+        {% if not package.latest %}
+        <div>No releases yet!</div>
+        {% endif %}
+        {% if package.latest %}
+            {% with package.latest as release %}
+                <ul class="nav nav-tabs">
+                    <li class="active"><a href="#description" data-toggle="tab" id="description-tab">{% trans "Description" %}</a></li>
+                    <li><a href="#info" data-toggle="tab" id="info-tab">{% trans "Info" %}</a></li>
+                    <li><a href="#releases" data-toggle="tab" id="releases-tab">{% trans "All Releases" %}</a></li>
+                    {% if release.distributions.count %}<li><a href="#downloads" data-toggle="tab" id="downloads-tab">{% trans "Downloads" %}</a></li>{% endif %}
+                    {% if package.owner == request.user or request.user in package.maintainers %}
+                        <li><a href="{% url userpypi-package-manage username package.name %}">{% trans "Manage" %}</a></li>
+                    {% endif %}
+                </ul>
+                <div class="tab-content">
+                    <article class="rst-body tab-pane active" id="description">
+                        {% load safemarkup %}
+                        {{ release.description|saferst }}
+                    </article>
+                    <article class="tab-pane" id="info">
+                        {% include "djangopypi/includes/packageinfo.html" %}
+                    </article>
+                    <article class="tab-pane" id="releases">
+                        {% include "djangopypi/includes/releaseinfo.html" %}
+                    </article>
+                    {% if release.distributions.count %}<article class="tab-pane" id="downloads">
+                        {% include "djangopypi/includes/distributioninfo.html" %}
+                    </article>{% endif %}
+                    {% if package.owner == request.user or request.user in package.maintainers %}
+                        <article class="tab-pane" id="manage">
+                            Manage me
+                        </article>
+                    {% endif %}
+                </div>
+            {% endwith %}
+        {% endif %}
+{% endblock %}
+{% block extra_body %}
+    <script type="text/javascript" src="{{ STATIC_URL }}js/bootstrap-tab.js"></script>
+    <script type="text/javascript" charset="utf-8">
+        if (document.location.hash !== "") {
+            $(document.location.hash+"-tab").tab('show');
+        }
+    </script>
+{% endblock %}

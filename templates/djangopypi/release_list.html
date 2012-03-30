@@ -1,0 +1,25 @@
+{% extends "site_base.html" %}
+{% block head_title %}Package Index Releases{% endblock %}
+{% block body %}
+<div class="container">
+    <h2>Latest releases</h2>
+    {% if release_list %}
+        <table class="table-striped table-bordered table-condensed">
+    		<thead>
+    			<th>Updated</th><th>Package</th><th>Description</th>
+    		</thead>
+    		<tbody>
+    		{% for release in release_list %}
+    			<tr>
+    		        <td>{{ release.created|date:"Y-m-d" }}</td>
+			        <td><a href="{% url userpypi-release username release.package.name release.version %}"/>{{ release }}</a></td>
+    		        <td>{{ release.summary|truncatewords:10 }}</td>
+    		    </tr>
+    		{% endfor %}
+    		</tbody>
+    	</table>
+    {% else %}
+    <em>No releases</em>
+    {% endif %}
+</div>
+{% endblock %}

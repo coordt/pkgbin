@@ -1,0 +1,2 @@
+{% with release.package as package %}{% include "djangopypi/package_doap.xml" %}{% endwith %}
+

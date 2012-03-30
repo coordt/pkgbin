@@ -1,0 +1,30 @@
+{% extends 'userena/base_userena.html' %}
+{% load i18n %}
+
+{% block title %}{% trans "Signup" %}{% endblock %}
+
+{% block content %}
+<div class="row">
+    <div class="span6 offset3">
+<form action="" method="post" class="form-horizontal">
+  {% csrf_token %}
+  <fieldset>
+    <legend>Signup</legend>
+    {% for field in form %}
+    {% comment %} Displaying checkboxes differently {% endcomment %}
+    {% if field.name == 'tos' %}
+    <div class="controls{% if field.errors %} error{% endif %}">
+    <label for="id_{{ field.name }}" class="checkbox">{{ field }} {{ field.label }}</label>
+    <span class="help-inline">{{ field.errors }}</span>
+    </div>
+    {% else %}
+    <div class="control-group{% if field.errors %} error{% endif %}">
+        <label for="id_{{ field.name }}" class="control-label">{{ field.label }}</label>
+        <div class="controls">{{ field }}<span class="help-inline">{{ field.errors }}</span></div>
+    </div>
+    {% endif %}
+    {% endfor %}
+  </fieldset>
+  <div class="form-actions"><input type="submit" class="btn btn-primary" value="{% trans "Signup"%}" /></div>
+</form>
+</div></div>{% endblock %}

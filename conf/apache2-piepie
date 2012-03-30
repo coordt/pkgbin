@@ -1,0 +1,35 @@
+<VirtualHost *:80>
+		ServerAdmin coreyoordt@gmail.com
+		ServerName piepie
+		ServerAlias media-piepie
+		DocumentRoot /var/code/piepie/media
+
+		WSGIDaemonProcess piepie user=webdev group=webdev processes=3 threads=1 maximum-requests=1000 python-path=/home/webdev/.virtualenvs/piepie/lib/python2.5/site-packages
+		WSGIProcessGroup piepie
+		WSGIScriptAlias / /var/code/piepie/conf/piepie.wsgi
+		
+		Alias /media /var/code/piepie/media
+		<Directory /var/code/piepie/media>
+			SetHandler None
+			AddOutputFilterByType DEFLATE text/plain
+			AddOutputFilterByType DEFLATE text/xml
+			AddOutputFilterByType DEFLATE application/xhtml+xml
+			AddOutputFilterByType DEFLATE text/css
+			AddOutputFilterByType DEFLATE application/xml
+			AddOutputFilterByType DEFLATE image/svg+xml
+			AddOutputFilterByType DEFLATE application/rss+xml
+			AddOutputFilterByType DEFLATE application/atom_xml
+			AddOutputFilterByType DEFLATE application/x-javascript
+			AddOutputFilterByType DEFLATE application/x-httpd-php
+			AddOutputFilterByType DEFLATE application/x-httpd-fastphp
+			AddOutputFilterByType DEFLATE application/x-httpd-eruby
+			AddOutputFilterByType DEFLATE text/html
+			FileETag INode MTime Size
+		</Directory>
+		
+		Alias /admin-media /home/webdev/.virtualenvs/piepie/lib/python2.5/site-packages/django/contrib/admin/media
+		<Directory /home/webdev/.virtualenvs/piepie/lib/python2.5/site-packages/django/contrib/admin/media>
+			SetHandler None
+		</Directory>
+		
+</VirtualHost>

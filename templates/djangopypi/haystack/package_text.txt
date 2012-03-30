@@ -1,0 +1,8 @@
+{{ object.name }}
+
+{% if object.latest %}
+{{ object.latest.release_name }}	
+{% for key, list in object.latest.package_info.iterlists %}
+{{ key }}: {% for item in list %}{{ item }}{% if not forloop.last %}; {% endif %}{% endfor %}
+{% endfor %}
+{% endif %}
