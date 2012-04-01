@@ -8,6 +8,9 @@
 	WSGIProcessGroup pkgbin
 	WSGIScriptAlias / /var/sites/pkgbin/deployed/wsgi.py
 	
+	ErrorLog /var/log/apache2/pkgbin.error.log
+	CustomLog /var/log/apache2/pkgbin.access.log combined
+	
 	Alias /media /var/sites/pkgbin/deployed/media
 	<Directory /var/sites/pkgbin/deployed/media>
 		SetHandler None
