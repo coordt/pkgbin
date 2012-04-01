@@ -1,20 +1,20 @@
 import os
 
-from django.conf.urls.defaults import *
+from django.conf.urls import patterns, include, url
+from django.conf import settings
 from django.contrib import admin
 from django.contrib.staticfiles.urls import staticfiles_urlpatterns
-from django.conf import settings
+from django.views.generic import TemplateView
 from userena.settings import USERENA_REDIRECT_ON_SIGNOUT
-admin.autodiscover()
 
-handler500 = 'django_ext.views.custom_server_error'
+admin.autodiscover()
 
 sitemaps = {
 }
 
 urlpatterns = patterns('',
     (r'^admin/', include(admin.site.urls)),
-    (r'^$', 'django.views.generic.simple.direct_to_template', {'template':'homepage.html'}),
+    (r'^$', TemplateView.as_view(template_name='homepage.html')),
     (r'^admin_tools/', include('admin_tools.urls')),
     
     # Signup, signin and signout
