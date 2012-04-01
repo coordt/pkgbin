@@ -39,7 +39,7 @@ DATABASES = {
     }
 }
 
-TIME_ZONE = 'America/New_York'
+USE_TZ = True
 LANGUAGE_CODE = 'en-us'
 USE_I18N = True
 
