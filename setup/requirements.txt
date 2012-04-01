@@ -1,29 +1,17 @@
 # These are your project's requirements and you should change them
 # to meet any customizations you wish to implement
 
-django
+--extra-index-url=http://callowayproject.com/pypi/
 
-django-userena==1.0.2
-django-guardian==1.0.3
-django-bootstrap-form
-pillow
-Pygments==1.5
+-e git+git@github.com:coordt/djangopypi.git#egg=djangopypi-dev
 calloway==0.4.2
-distribute==0.6.19
+django
 django-admin-tools==0.4.1
-django-appconf==0.4.1
 django-bootstrap-form==2.0.3
 django-guardian==1.0.3
-django-staticfiles==1.2
 django-tinymce
 django-tinymcewrapper
 django-userena==1.0.2
--e git+git@github.com:coordt/djangopypi.git#egg=djangopypi-dev
-docutils==0.8.1
 easy-thumbnails==1.0-alpha-21
-pudb==2012.1
+pillow
 python-memcached==1.45
-urwid==1.0.1
-
-
-
