@@ -30,6 +30,13 @@ urlpatterns = patterns('',
         {'next_page': USERENA_REDIRECT_ON_SIGNOUT,
         'template_name': 'userena/signout.html'},
         name='userena_signout'),
+    url(r'^(?P<username>[^/]+)/edit/$',
+        'userena.views.profile_edit',
+        name='userena_profile_edit'),
+    #
+    url(r'^(?P<username>[^/]+)/profile/$',
+        'userena.views.profile_detail',
+        name='userena_profile_detail'),
     
     # Reset password
     
