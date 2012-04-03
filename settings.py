@@ -20,11 +20,11 @@ TEMPLATE_DEBUG = DEBUG
 from calloway.settings import *
 
 ADMINS = (
-    ('coordt', 'coreyoordt@gmail.com'),
+    ('webmaster', 'webmaster@pkgbin.com'),
 )
 MANAGERS = ADMINS
-DEFAULT_FROM_EMAIL='coreyoordt@gmail.com'
-SERVER_EMAIL='coreyoordt@gmail.com'
+DEFAULT_FROM_EMAIL='webmaster@pkgbin.com'
+SERVER_EMAIL='webmaster@pkgbin.com'
 
 SECRET_KEY = ''
 
