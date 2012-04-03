@@ -8,10 +8,10 @@ calloway==0.4.2
 django
 django-admin-tools==0.4.1
 django-bootstrap-form==2.0.3
-django-guardian==1.0.3
+django-guardian==1.0.4
 django-tinymce
 django-tinymcewrapper
-django-userena==1.0.2
+django-userena==1.0.3
 easy-thumbnails==1.0-alpha-21
 pillow
 python-memcached==1.45
