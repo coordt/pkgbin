@@ -78,6 +78,7 @@ MIDDLEWARE_CLASSES = (
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.locale.LocaleMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
+    # 'hunger.middleware.BetaMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'userena.middleware.UserenaLocaleMiddleware',
@@ -99,6 +100,16 @@ TEMPLATE_LOADERS = (
 )
 
 AUTHENTICATION_BACKENDS = (
+    # 'social_auth.backends.twitter.TwitterBackend',
+    # 'social_auth.backends.google.GoogleOAuthBackend',
+    # 'social_auth.backends.google.GoogleOAuth2Backend',
+    # 'social_auth.backends.google.GoogleBackend',
+    # 'social_auth.backends.yahoo.YahooBackend',
+    # 'social_auth.backends.browserid.BrowserIDBackend',
+    # 'social_auth.backends.contrib.linkedin.LinkedinBackend',
+    # 'social_auth.backends.contrib.livejournal.LiveJournalBackend',
+    # 'social_auth.backends.contrib.github.GithubBackend',
+    # 'social_auth.backends.OpenIDBackend',
     'userena.backends.UserenaAuthenticationBackend',
     'guardian.backends.ObjectPermissionBackend',
     'django.contrib.auth.backends.ModelBackend',
@@ -140,6 +151,9 @@ INSTALLED_APPS = (
     'djangopypi',
     'userrouter',
     'bootstrapform',
+    'djcelery',
+    'queued_storage',
+    # 'hunger',
 )
 
 ADMIN_TOOLS_THEMING_CSS = 'calloway/admin/css/theming.css'
@@ -152,13 +166,19 @@ LOGIN_REDIRECT_URL = '/accounts/%(username)s/'
 LOGIN_URL = '/accounts/signin/'
 LOGOUT_URL = '/accounts/signout/'
 
-DJANGOPYPI_PROXY_MISSING = True
+DJANGOPYPI_SETTINGS = {
+    'PROXY_MISSING': True,
+    'RELEASE_FILE_STORAGE': 'cumulus.storage.CloudFilesStorage',
+}
 
+#######################
+# Userena settings
+#######################
 ANONYMOUS_USER_ID = -1
 
 USERENA_SIGNIN_REDIRECT_URL = "/%(username)s/"
 USERENA_FORBIDDEN_USERNAMES = ('signup', 'signout', 'signin', 'activate', 'me', 
-        'password', 'pypi', 'piepie', 'admin', 'admin_tools', 'username', 'user',)
+        'password', 'pypi', 'pkgbin', 'admin', 'admin_tools', 'username', 'user',)
 USERENA_DISABLE_PROFILE_LIST = True
 USERENA_HIDE_EMAIL = True
 
@@ -190,6 +210,37 @@ LOGGING = {
         },
     }
 }
+
+#######################
+# Celery settings
+#######################
+
+import djcelery
+djcelery.setup_loader()
+
+BROKER_URL = "redis://localhost:6379/0"
+CELERY_RESULT_BACKEND = "redis"
+CELERY_REDIS_HOST = "localhost"
+CELERY_REDIS_PORT = 6379
+CELERY_REDIS_DB = 0
+
+
+
+# BETA_INVITE_CODE_LENGTH
+# BETA_ENABLE_BETA
+# BETA_NEVER_ALLOW_VIEWS
+# BETA_ALWAYS_ALLOW_VIEWS
+# BETA_ALWAYS_ALLOW_MODULES
+# BETA_ALLOW_FLATPAGES
+# BETA_SIGNUP_VIEWS
+# BETA_SIGNUP_CONFIRMATION_VIEW
+# BETA_REDIRECT_URL
+# BETA_SIGNUP_URL
+# BETA_EMAIL_TEMPLATES_DIR
+# BETA_EMAIL_MODULE
+# BETA_EMAIL_CONFIRM_FUNCTION
+# BETA_EMAIL_INVITE_FUNCTION
+
 
 try:
     from local_settings import *

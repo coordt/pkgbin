@@ -3,15 +3,20 @@
 
 --extra-index-url=http://callowayproject.com/pypi/
 
--e git+git@github.com:coordt/djangopypi.git#egg=djangopypi-dev
 calloway==0.4.2
+celery==2.5.1
 django
+djangopypi==0.4.4b4
 django-admin-tools==0.4.1
 django-bootstrap-form==2.0.3
+django-celery==2.5.1
+django-cumulus==1.0.5
 django-guardian==1.0.4
 django-tinymce
 django-tinymcewrapper
+django-queued-storage==0.5
 django-userena==1.0.3
 easy-thumbnails==1.0-alpha-21
 pillow
 python-memcached==1.45
+https://github.com/downloads/andymccurdy/redis-py/redis-2.4.11.tar.gz
