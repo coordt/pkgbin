@@ -1,7 +1,7 @@
 <VirtualHost *:80>
 	ServerAdmin coreyoordt@gmail.com
-	ServerName pkgbin
-	ServerAlias media-pkgbin
+	ServerName pkgbin.com
+	ServerAlias packagebin.com
 	DocumentRoot /var/sites/pkgbin/deployed/media
 
 	WSGIDaemonProcess pkgbin user=webdev group=webdev processes=3 threads=1 maximum-requests=1000 python-path=/var/sites/pkgbin/deployed:/var/sites/pkgbin/deployed/virtualenv/lib/python2.7/site-packages
