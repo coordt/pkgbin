@@ -15,7 +15,7 @@
                 <li class="active"><a href="{% url userpypi-package-manage request.user package.name %}">{% trans "Manage" %}</a></li>
             {% endif %}
         </ul>
-	<form action="" method="post" class="form-horizontal">
+	<form action="" method="post" class="form-horizontal">{% csrf_token %}
         {{ form|bootstrap }}
         <div class="form-actions">
             <input type="submit" class="btn btn-primary" value="{% trans "Save" %}" />

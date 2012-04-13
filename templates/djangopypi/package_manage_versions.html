@@ -4,7 +4,7 @@
 	</head>
 	<body>
 		<h1>Manage {{ package.name }} Versions</h1>
-		<form action="" method="post">
+		<form action="" method="post">{% csrf_token %}
 		{{ formset.management_form }}
 		<table>
 			<thead>

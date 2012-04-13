@@ -5,7 +5,7 @@
 	<body>
 		<h1>Manage {{ release }} Files</h1>
 		{% if formset.forms %}
-		<form action="" method="post">
+		<form action="" method="post">{% csrf_token %}
 		{{ formset.management_form }}
 		<table>
 			<thead>
@@ -42,7 +42,7 @@
 		{% if upload_form %}
 		<h2>Upload a Distribution</h2>
 		<form action="{% url djangopypi-release-upload-file package=release.package.name version=release.version %}"
-			method="post" enctype="multipart/form-data">
+			method="post" enctype="multipart/form-data">{% csrf_token %}
 			{{ upload_form.as_p }}
 			<div><input type="submit" value="Upload" /></div>
 		</form>

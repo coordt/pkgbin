@@ -6,8 +6,7 @@
 {% block content %}
 <div class="row">
     <div class="span6 offset3">
-<form action="" method="post" class="form-horizontal">
-  {% csrf_token %}
+<form action="" method="post" class="form-horizontal">{% csrf_token %}
   <fieldset>
     <legend>Signup</legend>
     {% for field in form %}
