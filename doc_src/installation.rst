@@ -6,12 +6,12 @@ Installation is easy using ``pip`` or ``easy_install``.
 
 .. code-block:: bash
 
-	pip install piepie
+	pip install pkgbin
 
 or
 .. code-block:: bash
 
-	easy_install piepie
+	easy_install pkgbin
 
 Dependencies
 ************
