@@ -17,7 +17,7 @@ class PackageListView(ListView):
     
     def get_context_data(self, **kwargs):
         context = super(PackageListView, self).get_context_data(**kwargs)
-        context['username'] = self.username
+        context['username'] = self.kwargs.get('username', None)
         context['is_owner'] = self.username == self.request.user.username
         return context
     

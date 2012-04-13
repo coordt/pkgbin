@@ -6,10 +6,10 @@
     <link rel="meta" title="DOAP" type="application/rdf+xml" href="{% url userpypi-package-doap username=username package=package.name %}"/> 
 {% endblock %}
 {% block body %}
-        <h1>{{ package.name }} {% for r in package.releases.all %}
+        <h1>{% if package.private %}<img src="{{ STATIC_URL}}img/Lock.png" width="30" height="30" alt="private" title="private">
+            {% else %}<img src="{{ STATIC_URL}}img/Unlock.png" width="30" height="30" alt="public" title="public">{% endif %}{{ package.name }} {% for r in package.releases.all %}
 <a class="label" href="{% url userpypi-release username r.package.name r.version %}">{{ r.version }}</a>
         {% endfor %}</h1>
-        user {{ username }}
         {% if not package.latest %}
         <div>No releases yet!</div>
         {% endif %}
