@@ -12,7 +12,7 @@ class Command(BaseCommand):
         
         for username in args:
             
-            container_name = user.username
+            container_name = username
             conn = cloudfiles.get_connection(
                             username=settings.CUMULUS['USERNAME'],
                             api_key=settings.CUMULUS['API_KEY'])
