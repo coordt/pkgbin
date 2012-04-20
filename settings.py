@@ -30,7 +30,7 @@ SECRET_KEY = ''
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3', 
+        'ENGINE': 'django.db.backends.sqlite3',
         'NAME': 'dev.db',
         'USER': '',
         'PASSWORD': '',
@@ -51,7 +51,7 @@ try:
     from local_settings import MEDIA_ROOT_PREFIX
 except ImportError:
     MEDIA_ROOT_PREFIX = os.path.join(PROJECT_ROOT, 'media')
-try:    
+try:
     from local_settings import MEDIA_ROOT
 except ImportError:
     MEDIA_ROOT = os.path.join(MEDIA_ROOT_PREFIX, 'uploads')
@@ -59,7 +59,7 @@ try:
     from local_settings import STATIC_ROOT
 except ImportError:
     STATIC_ROOT = os.path.join(MEDIA_ROOT_PREFIX, 'static')
-    
+
 
 MEDIA_URL = '%suploads/' % MEDIA_URL_PREFIX
 STATIC_URL = "%sstatic/" % MEDIA_URL_PREFIX
@@ -82,6 +82,7 @@ MIDDLEWARE_CLASSES = (
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'userena.middleware.UserenaLocaleMiddleware',
+    'hunger.middleware.BetaMiddleware',
 )
 TEMPLATE_CONTEXT_PROCESSORS = (
     "django.contrib.auth.context_processors.auth",
@@ -143,6 +144,7 @@ INSTALLED_APPS = (
     'django.contrib.flatpages',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+
     'calloway',
     'userena',
     'guardian',
@@ -153,7 +155,8 @@ INSTALLED_APPS = (
     'bootstrapform',
     'djcelery',
     'queued_storage',
-    # 'hunger',
+    #"kombu.transport.django",
+    'hunger',
 )
 
 ADMIN_TOOLS_THEMING_CSS = 'calloway/admin/css/theming.css'
@@ -177,7 +180,7 @@ DJANGOPYPI_SETTINGS = {
 ANONYMOUS_USER_ID = -1
 
 USERENA_SIGNIN_REDIRECT_URL = "/%(username)s/"
-USERENA_FORBIDDEN_USERNAMES = ('signup', 'signout', 'signin', 'activate', 'me', 
+USERENA_FORBIDDEN_USERNAMES = ('signup', 'signout', 'signin', 'activate', 'me',
         'password', 'pypi', 'pkgbin', 'admin', 'admin_tools', 'username', 'user',)
 USERENA_DISABLE_PROFILE_LIST = True
 USERENA_HIDE_EMAIL = True
@@ -229,8 +232,8 @@ CELERYBEAT_PIDFILE = '/var/run/celerybeat.pid'
 # BETA_INVITE_CODE_LENGTH
 # BETA_ENABLE_BETA
 # BETA_NEVER_ALLOW_VIEWS
-# BETA_ALWAYS_ALLOW_VIEWS
-# BETA_ALWAYS_ALLOW_MODULES
+BETA_ALWAYS_ALLOW_VIEWS = ('userena.views.signin',)
+# BETA_ALWAYS_ALLOW_MODULES = ('userena.views',)
 # BETA_ALLOW_FLATPAGES
 # BETA_SIGNUP_VIEWS
 # BETA_SIGNUP_CONFIRMATION_VIEW
