@@ -232,13 +232,13 @@ CELERYBEAT_PIDFILE = '/var/run/celerybeat.pid'
 # BETA_INVITE_CODE_LENGTH
 # BETA_ENABLE_BETA
 # BETA_NEVER_ALLOW_VIEWS
-BETA_ALWAYS_ALLOW_VIEWS = ('userena.views.signin',)
-# BETA_ALWAYS_ALLOW_MODULES = ('userena.views',)
+BETA_ALWAYS_ALLOW_VIEWS = ('userena.views.signin', 'userena.views.direct_to_user_template', 'userena.views.activate')
+#BETA_ALWAYS_ALLOW_MODULES = ('userena.views',)
 # BETA_ALLOW_FLATPAGES
-# BETA_SIGNUP_VIEWS
-# BETA_SIGNUP_CONFIRMATION_VIEW
+BETA_SIGNUP_VIEWS = ('userena.views.signup',)
+# BETA_SIGNUP_CONFIRMATION_VIEW = ('userena.views.direct_to_user_template',)
 # BETA_REDIRECT_URL
-# BETA_SIGNUP_URL
+BETA_SIGNUP_URL = '/signup/'
 # BETA_EMAIL_TEMPLATES_DIR
 # BETA_EMAIL_MODULE
 # BETA_EMAIL_CONFIRM_FUNCTION
