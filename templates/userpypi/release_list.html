@@ -12,7 +12,7 @@
             {% for release in release_list %}
                 <tr>
                     <td>{{ release.created|date:"Y-m-d" }}</td>
-                    <td><a href="{% url userpypi-release username release.package.name release.version %}"/>{{ release }}</a></td>
+                    <td><a href="{% url userpypi-release owner release.package.name release.version %}"/>{{ release }}</a></td>
                     <td>{{ release.summary|truncatewords:10 }}</td>
                 </tr>
             {% endfor %}

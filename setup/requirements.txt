@@ -6,7 +6,6 @@
 calloway==0.4.2
 celery==2.5.1
 django
-djangopypi==0.4.4b5
 django-admin-tools==0.4.1
 django-bootstrap-form==2.0.3
 django-celery==2.5.1
@@ -20,3 +19,4 @@ easy-thumbnails==1.0-alpha-21
 pillow
 python-memcached==1.45
 https://github.com/downloads/andymccurdy/redis-py/redis-2.4.11.tar.gz
+userpypi==0.5b1

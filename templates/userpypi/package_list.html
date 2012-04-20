@@ -4,7 +4,7 @@
     <h2>Package Index</h2>
     <ul>
         {% for package in package_list %}
-        <li><a href="{% url userpypi-package username=username package=package.name %}">{{ package.name }}</a>
+        <li><a href="{% url userpypi-package owner=owner package=package.name %}">{{ package.name }}</a>
             {% if package.latest and package.latest.summary %}: {{ package.latest.summary }}{% endif %}
         </li>
         {% endfor %}

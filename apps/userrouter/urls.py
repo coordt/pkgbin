@@ -1,72 +1,13 @@
 from django.conf.urls.defaults import *
-from djangopypi.feeds import ReleaseFeed
-from .views import PackageListView, PackageDetailView, ReleaseDetailView, PackageManageView
 
 from userena.settings import USERENA_ACTIVATION_REQUIRED, USERENA_ACTIVATION_DAYS
 
+from userpypi.views.packages import PackageListView
+
 urlpatterns = patterns('',
-    
-    # Basic Package Indexes
-    url(r'^(?P<username>[^/]+)/$',
+    url(r'^(?P<owner>[^/]+)/$',
         PackageListView.as_view(),
         name="userrouter-index"),
-    url(r'^(?P<username>[^/]+)/packages/$',
-        PackageListView.as_view(), 
-        name='userpypi-package-index'),
-    
-    # url(r'^(?P<username>[^/]+)/search/$',
-    #     'packages.search',
-    #     name='userpypi-search'),
-    url(r'^(?P<username>[^/]+)/rss/$', 
-        ReleaseFeed(), 
-        name='userpypi-rss'),
-    
-    # Simple indexes
-    url(r'^(?P<username>[^/]+)/simple/$',
-        PackageListView.as_view(simple=True),
-        name='userpypi-package-index-simple'),
-    url(r'^(?P<username>[^/]+)/simple/(?P<package>[\w\d_\.\-]+)/$',
-        PackageDetailView.as_view(simple=True),
-        name='userpypi-package-simple'),
-    
-    # Regular Indexes
-    url(r'^(?P<username>[^/]+)/pypi/$', 
-        'djangopypi.views.root', 
-        name="userpypi-root"),
-    url(r'^(?P<username>[^/]+)/pypi/(?P<package>[\w\d_\.\-]+)/$',
-        PackageDetailView.as_view(),
-        name='userpypi-package'),
-    url(r'^(?P<username>[^/]+)/pypi/(?P<package>[\w\d_\.\-]+)/rss/$', 
-        ReleaseFeed(),
-        name='userpypi-package-rss'),    
-    url(r'^(?P<username>[^/]+)/pypi/(?P<package>[\w\d_\.\-]+)/doap.rdf$',
-        PackageDetailView.as_view(doap=True),
-        name='userpypi-package-doap'),
-    url(r'^(?P<username>[^/]+)/pypi/(?P<package>[\w\d_\.\-]+)/manage/$',
-        PackageManageView.as_view(),
-        name='userpypi-package-manage'),
-    # url(r'^(?P<username>[^/]+)/pypi/(?P<package>[\w\d_\.\-]+)/manage/versions/$',
-    #     'packages.manage_versions',
-    #     name='userpypi-package-manage-versions'),
-    url(r'^(?P<username>[^/]+)/pypi/(?P<package>[\w\d_\.\-]+)/(?P<version>[\w\d_\.\-]+)/$',
-        ReleaseDetailView.as_view(),
-        name='userpypi-release'),
-    url(r'^(?P<username>[^/]+)/pypi/(?P<package>[\w\d_\.\-]+)/(?P<version>[\w\d_\.\-]+)/doap.rdf$',
-        ReleaseDetailView.as_view(doap=True),
-        name='userpypi-release-doap'),
-    # url(r'^(?P<username>[^/]+)/pypi/(?P<package>[\w\d_\.\-]+)/(?P<version>[\w\d_\.\-]+)/manage/$',
-    #     'releases.manage',
-    #     name='djangopypi-release-manage'),
-    # url(r'^(?P<username>[^/]+)/pypi/(?P<package>[\w\d_\.\-]+)/(?P<version>[\w\d_\.\-]+)/metadata/$',
-    #     'releases.manage_metadata',
-    #     name='djangopypi-release-manage-metadata'),
-    # url(r'^(?P<username>[^/]+)/pypi/(?P<package>[\w\d_\.\-]+)/(?P<version>[\w\d_\.\-]+)/files/$',
-    #     'releases.manage_files',
-    #     name='userpypi-release-manage-files'),
-    # url(r'^(?P<username>[^/]+)/pypi/(?P<package>[\w\d_\.\-]+)/(?P<version>[\w\d_\.\-]+)/files/upload/$',
-    #     'releases.upload_file',
-    #     name='userpypi-release-upload-file'),
-    
     
     # User Signup
     url(r'^(?P<username>[\.\w]+)/signup/complete/$',
@@ -111,10 +52,11 @@ urlpatterns = patterns('',
         'userena.views.direct_to_user_template',
         {'template_name': 'userena/password_complete.html'},
         name='userena_password_change_complete'),
-
+    
     # Edit profile
     url(r'^(?P<username>[\.\w]+)/edit/$',
         'userena.views.profile_edit',
         name='userena_profile_edit'),
     
+    ('', include('userpypi.urls')),
 )

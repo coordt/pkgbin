@@ -50,10 +50,10 @@
 	{% endwith %}
 	{% endif %}
 	{% if release %}
-	{% include "djangopypi/release_doap_fragment.xml" %}
+	{% include "userpypi/release_doap_fragment.xml" %}
 	{% else %}
 	{% for release in package.releases.all %}
-	{% include "djangopypi/release_doap_fragment.xml" %}
+	{% include "userpypi/release_doap_fragment.xml" %}
 	{% endfor %}
 	{% endif %}
 </Project>

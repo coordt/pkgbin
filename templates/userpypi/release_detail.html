@@ -26,10 +26,10 @@
             {{ release.description|saferst }}
         </article>
         <article class="tab-pane" id="info">
-            {% include "djangopypi/includes/packageinfo.html" %}
+            {% include "userpypi/includes/packageinfo.html" %}
         </article>
         <article class="tab-pane" id="releases">
-            {% include "djangopypi/includes/releaseinfo.html" with package=release.package%}
+            {% include "userpypi/includes/releaseinfo.html" with package=release.package%}
         </article>
         {% if release.distributions.count %}
             <article class="tab-pane" id="downloads">

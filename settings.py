@@ -148,7 +148,7 @@ INSTALLED_APPS = (
     'guardian',
     'easy_thumbnails',
     'profiles',
-    'djangopypi',
+    'userpypi',
     'userrouter',
     'bootstrapform',
     'djcelery',

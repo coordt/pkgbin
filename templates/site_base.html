@@ -43,7 +43,7 @@
             <li><a href="{% url userena_signin %}">Sign In</a></li>
             <li><a href="{% url userena_signup %}">Sign Up</a></li>
           {% else %}
-            <li><a href="{% url userrouter-index username=user.username %}"><i class="icon-home icon-white"></i>&nbsp;{% if request.user.first_name %}{{ request.user.first_name }} {{ request.user.last_name}}{% else %}{{ request.user.username }}{% endif %}</a></li>
+            <li><a href="{% url userrouter-index owner=user.username %}"><i class="icon-home icon-white"></i>&nbsp;{% if request.user.first_name %}{{ request.user.first_name }} {{ request.user.last_name}}{% else %}{{ request.user.username }}{% endif %}</a></li>
             <li><a href="{% url userena_profile_edit username=user.username %}"><i class="icon-cog icon-white"></i>&nbsp;Edit Profile</a></li>
             <li><a href="{% url userena_signout %}"><i class="icon-off icon-white"></i>&nbsp;Sign Out</a></li>
           {% endif %}

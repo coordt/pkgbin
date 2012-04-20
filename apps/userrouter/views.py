@@ -1,7 +1,7 @@
 from django.core.exceptions import ObjectDoesNotExist
 from django.views.generic import ListView, DetailView, UpdateView
 
-from djangopypi.models import Package, Release
+from userpypi.models import Package, Release
 
 class PackageListView(ListView):
     model = Package
@@ -27,9 +27,9 @@ class PackageListView(ListView):
         a list. May not be called if render_to_response is overridden.
         """
         if self.simple:
-            return ['djangopypi/package_list_simple.html']
+            return ['userpypi/package_list_simple.html']
         else:
-            return ['djangopypi/package_list.html']
+            return ['userpypi/package_list.html']
 
 class PackageDetailView(DetailView):
     model = Package
@@ -75,17 +75,17 @@ class PackageDetailView(DetailView):
         a list. May not be called if render_to_response is overridden.
         """
         if self.simple:
-            return ['djangopypi/package_detail_simple.html']
+            return ['userpypi/package_detail_simple.html']
         elif self.doap:
-            return ['djangopypi/package_doap.xml']
+            return ['userpypi/package_doap.xml']
         else:
-            return ['djangopypi/package_detail.html']
+            return ['userpypi/package_detail.html']
 
 
 class PackageManageView(UpdateView):
     model = Package
     context_object_name = 'package'
-    template_name = 'djangopypi/package_manage.html'
+    template_name = 'userpypi/package_manage.html'
     
     def get_queryset(self):
         self.username = self.kwargs['username']
@@ -128,9 +128,9 @@ class ReleaseListView(ListView):
         a list. May not be called if render_to_response is overridden.
         """
         if self.simple:
-            return ['djangopypi/release_list_simple.html']
+            return ['userpypi/release_list_simple.html']
         else:
-            return ['djangopypi/release_list.html']
+            return ['userpypi/release_list.html']
         
 
 class ReleaseDetailView(DetailView):
@@ -176,6 +176,6 @@ class ReleaseDetailView(DetailView):
         a list. May not be called if render_to_response is overridden.
         """
         if self.doap:
-            return ['djangopypi/release_doap.xml']
+            return ['userpypi/release_doap.xml']
         else:
-            return ['djangopypi/release_detail.html']
+            return ['userpypi/release_detail.html']

@@ -23,9 +23,9 @@
 					<td>{{ form.DELETE }}</td>
 					<td>{{ release.version }}</td>
 					<td>{{ form.hidden }}</td>
-					<td><a href="{% url djangopypi-release package=release.package.pk version=release.version %}">Show</a></td>
-					<td><a href="{% url djangopypi-release-manage-metadata package=release.package.pk version=release.version %}">Edit</a></td>
-					<td><a href="{% url djangopypi-release-manage-files package=release.package.pk version=release.version %}">Files</a></td>
+					<td><a href="{% url userpypi-release package=release.package.pk version=release.version %}">Show</a></td>
+					<td><a href="{% url userpypi-release-manage-metadata package=release.package.pk version=release.version %}">Edit</a></td>
+					<td><a href="{% url userpypi-release-manage-files package=release.package.pk version=release.version %}">Files</a></td>
 				</tr>
 				{% endwith %}
 			{% endfor %}
