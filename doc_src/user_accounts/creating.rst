@@ -10,4 +10,6 @@ Creating User Accounts
 
 #. Your user page is at http://pkgbin.com/username/
 
-#. A new container for the user is created.
+#. Your personal package index is at http://pkgbin.com/username/pypi/
+
+
