@@ -1,0 +1,23 @@
+{% extends 'site_base.html' %}
+{% load i18n %}
+
+{% block title %}{% trans "Request Beta Invite" %}{% endblock %}
+
+{% block body %}
+<div class="row">
+    <div class="span6 offset3">
+<form action="" method="post" class="form-horizontal">{% csrf_token %}
+  <fieldset>
+    <legend>Request Beta Invite</legend>
+
+{% for field in form %}
+    <div class="control-group{% if field.errors %} error{% endif %}">
+        <label for="id_{{ field.name }}" class="control-label">{{ field.label }}</label>
+        <div class="controls">{{ field }}<span class="help-inline">{{ field.errors }}</span></div>
+    </div>
+{% endfor %}
+  <div class="form-actions"><input type="submit" class="btn btn-primary" value="{% trans "Request Invite"%}" /></div>
+</form>
+</div>
+{% endblock %}
+

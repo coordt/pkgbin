@@ -16,9 +16,9 @@ urlpatterns = patterns('',
     (r'^admin/', include(admin.site.urls)),
     (r'^$', TemplateView.as_view(template_name='homepage.html')),
     (r'^admin_tools/', include('admin_tools.urls')),
-    
+
     # Signup, signin and signout
-    
+
     url(r'^signup/$',
         'userena.views.signup',
         name='userena_signup'),
@@ -37,9 +37,10 @@ urlpatterns = patterns('',
     url(r'^(?P<username>[^/]+)/profile/$',
         'userena.views.profile_detail',
         name='userena_profile_detail'),
-    
+
+    url(r'^beta/', include('hunger.urls')),
     # Reset password
-    
+
     url(r'^password/reset/$',
         'django.contrib.auth.views.password_reset',
         {'template_name': 'userena/password_reset_form.html',
@@ -56,7 +57,7 @@ urlpatterns = patterns('',
     url(r'^password/reset/confirm/complete/$',
         'django.contrib.auth.views.password_reset_complete',
         {'template_name': 'userena/password_reset_complete.html'}),
-    
+
 
     (r'', include('userrouter.urls')),
 

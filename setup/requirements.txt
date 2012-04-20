@@ -20,3 +20,4 @@ pillow
 python-memcached==1.45
 https://github.com/downloads/andymccurdy/redis-py/redis-2.4.11.tar.gz
 userpypi==0.5b1
+django-hunger==1.0.6
