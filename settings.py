@@ -230,13 +230,13 @@ CELERY_REDIS_DB = 0
 
 
 # BETA_INVITE_CODE_LENGTH
-# BETA_ENABLE_BETA
+BETA_ENABLE_BETA = True
 # BETA_NEVER_ALLOW_VIEWS
-BETA_ALWAYS_ALLOW_VIEWS = ('userena.views.signin', 'userena.views.direct_to_user_template', 'userena.views.activate')
-#BETA_ALWAYS_ALLOW_MODULES = ('userena.views',)
+BETA_ALWAYS_ALLOW_VIEWS = ('userena.views.signin', 'userena.views.direct_to_user_template', 'userena.views.activate',)
+# BETA_ALWAYS_ALLOW_MODULES
 # BETA_ALLOW_FLATPAGES
 BETA_SIGNUP_VIEWS = ('userena.views.signup',)
-# BETA_SIGNUP_CONFIRMATION_VIEW = ('userena.views.direct_to_user_template',)
+BETA_SIGNUP_CONFIRMATION_VIEW = 'userena.views.profile_detail'
 # BETA_REDIRECT_URL
 BETA_SIGNUP_URL = '/signup/'
 # BETA_EMAIL_TEMPLATES_DIR
