@@ -30,16 +30,22 @@ urlpatterns = patterns('',
         {'next_page': USERENA_REDIRECT_ON_SIGNOUT,
         'template_name': 'userena/signout.html'},
         name='userena_signout'),
-    url(r'^(?P<username>[^/]+)/edit/$',
-        'userena.views.profile_edit',
-        name='userena_profile_edit'),
-    #
-    url(r'^(?P<username>[^/]+)/profile/$',
-        'userena.views.profile_detail',
-        name='userena_profile_detail'),
+    
+    url(r'^beta/$', 
+        'hunger.views.invite', 
+        name='beta_invite'),
+    url(r'^beta/sent', 
+        'hunger.views.confirmation', 
+        name='beta_confirmation'),
+    url(r'^beta/verify/(\w+)/$', 
+        'hunger.views.verify_invite', 
+        name='beta_verify'),
+    url(r'^beta/expired', 
+        'hunger.views.expired', 
+        name='beta_used'),
 
-    url(r'^beta/', include('hunger.urls')),
     # Reset password
+
 
     url(r'^password/reset/$',
         'django.contrib.auth.views.password_reset',
@@ -57,7 +63,15 @@ urlpatterns = patterns('',
     url(r'^password/reset/confirm/complete/$',
         'django.contrib.auth.views.password_reset_complete',
         {'template_name': 'userena/password_reset_complete.html'}),
-
+    
+    url(r'^(?P<username>[^/]+)/edit/$',
+        'userena.views.profile_edit',
+        name='userena_profile_edit'),
+    
+    url(r'^(?P<username>[^/]+)/profile/$',
+        'userena.views.profile_detail',
+        name='userena_profile_detail'),
+    
 
     (r'', include('userrouter.urls')),
 

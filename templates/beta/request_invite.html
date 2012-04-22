@@ -1,9 +1,9 @@
-{% extends 'site_base.html' %}
+{% extends 'homepage.html' %}
 {% load i18n %}
 
 {% block title %}{% trans "Request Beta Invite" %}{% endblock %}
 
-{% block body %}
+{% block beta_message %}
 <div class="row">
     <div class="span6 offset3">
 <form action="" method="post" class="form-horizontal">{% csrf_token %}
