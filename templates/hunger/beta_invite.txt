@@ -1,0 +1,1 @@
+Visit http://{{ request.get_host }}{% url beta_verify code %} to join the private beta.
