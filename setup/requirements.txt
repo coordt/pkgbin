@@ -18,6 +18,6 @@ django-userena==1.0.3
 easy-thumbnails==1.0-alpha-21
 pillow
 python-memcached==1.45
-https://github.com/downloads/andymccurdy/redis-py/redis-2.4.11.tar.gz
-userpypi==0.5b1
+#https://github.com/downloads/andymccurdy/redis-py/redis-2.4.11.tar.gz
+userpypi==0.5
 django-hunger==1.0.6
