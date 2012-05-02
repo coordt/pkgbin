@@ -8,9 +8,9 @@ class Profile(UserenaBaseProfile):
         User,
         unique=True,
         related_name='profile')
-    organization = models.BooleanField(default=False)
-    members = models.ManyToManyField(
-        User, 
-        blank=True, 
-        related_name="organizations")
-    creator_id = models.IntegerField(blank=True, null=True)
+    # organization = models.BooleanField(default=False)
+    # members = models.ManyToManyField(
+    #     User, 
+    #     blank=True, 
+    #     related_name="organizations")
+    # creator_id = models.IntegerField(blank=True, null=True)
