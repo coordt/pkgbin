@@ -6,11 +6,14 @@ from django.contrib import admin
 from django.contrib.staticfiles.urls import staticfiles_urlpatterns
 from django.views.generic import TemplateView
 from userena.settings import USERENA_REDIRECT_ON_SIGNOUT
+from django.contrib.flatpages.models import FlatPage
 
 admin.autodiscover()
 
 sitemaps = {
 }
+flatpage_pattern = "|".join([x.strip("/") for x in FlatPage.objects.all().values_list('url', flat=True)])
+
 
 urlpatterns = patterns('',
     (r'^admin/', include(admin.site.urls)),
@@ -72,7 +75,8 @@ urlpatterns = patterns('',
         'userena.views.profile_detail',
         name='userena_profile_detail'),
     
-
+    (r'(?P<url>%s/)' % flatpage_pattern, 'django.contrib.flatpages.views.flatpage'),
+    
     (r'', include('userrouter.urls')),
 
 )
