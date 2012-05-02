@@ -1,1 +1,17 @@
-Visit http://{{ request.get_host }}{% url beta_verify code %} to join the private beta.
+Welcome to the Package Bin beta!
+
+Get access by visiting http://{{ request.get_host }}{% url beta_verify code %}
+
+Where to get support
+
+Packge Bin discussion group: 
+
+    https://groups.google.com/forum/#!forum/package-bin-discussion
+
+Package Bin Issues
+
+    https://github.com/coordt/pkgbin/issues
+
+Package Bin Support E-Mail
+
+   support@pkgbin.com

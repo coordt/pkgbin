@@ -228,11 +228,20 @@ CELERY_REDIS_PORT = 6379
 CELERY_REDIS_DB = 0
 CELERYBEAT_PIDFILE = '/var/run/celerybeat.pid'
 
+TEMPLATED_EMAIL_BACKEND = 'templated_email.backends.vanilla_django.TemplateBackend'
+
+#######################
+# Hunger settings
+#######################
 
 # BETA_INVITE_CODE_LENGTH
 BETA_ENABLE_BETA = True
 # BETA_NEVER_ALLOW_VIEWS
-BETA_ALWAYS_ALLOW_VIEWS = ('userena.views.signin', 'userena.views.direct_to_user_template', 'userena.views.activate',)
+BETA_ALWAYS_ALLOW_VIEWS = (
+    'userena.views.signin', 
+    'userena.views.direct_to_user_template', 
+    'userena.views.activate',
+)
 # BETA_ALWAYS_ALLOW_MODULES
 # BETA_ALLOW_FLATPAGES
 BETA_SIGNUP_VIEWS = ('userena.views.signup',)
