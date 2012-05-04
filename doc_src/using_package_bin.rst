@@ -23,22 +23,45 @@ How Python Packages Work
 Using Package Bin as Your Primary Index
 =======================================
 
+For uploading, modify ``~/.pypirc``::
 
+   index-servers =
+       pypi
+       pkgbin
 
-index-servers =
-    pypi
-    pkgbin
+   [pypirc]
+   servers =
+       pypi
+       pkgbin
 
-[pypirc]
-servers =
-    pypi
-    pkgbin
+   [pkgbin]
+   username:joecool
+   password:Pa55w0rd
+   repository:http://pkgbin.com/joecool/pypi/
 
-[pkgbin]
-username:joecool
-password:Pa55w0rd
-repository:http://pkgbin.com/joecool/pypi/
+   [pypi]
+   username:joecool
+   password:MyPa55w0rd
 
-[pypi]
-username:joecool
-password:MyPa55w0rd
+Adding the pkgbin under index-servers and [pypirc]servers and then add the [pkgbin] section with the username, password and repository lines.
+
+Then to upload a package, simply::
+
+   python setup.py register -r pkgbin sdist upload -r pkgbin
+
+For installation with ``pip``
+
+http://www.pip-installer.org/en/latest/configuration.html#config-files
+
+--index-url
+
+--extra-index-url
+
+$HOME/.pip/pip.conf or %HOME%\pip\pip.ini
+
+The URL specified is http://username:password@pkgbin.com/username/simple/
+
+Isn't this insecure?
+====================
+
+It isn't optimal security, but it is as far as ``pip`` can go right now. If new methods are adopted by ``pip`` then we'll support it.
