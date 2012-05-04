@@ -78,11 +78,11 @@ MIDDLEWARE_CLASSES = (
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.locale.LocaleMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
-    # 'hunger.middleware.BetaMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'userena.middleware.UserenaLocaleMiddleware',
-    'hunger.middleware.BetaMiddleware',
+    # 'hunger.middleware.BetaMiddleware',
+    'beta_middleware.BetaMiddleware',
 )
 TEMPLATE_CONTEXT_PROCESSORS = (
     "django.contrib.auth.context_processors.auth",
@@ -241,6 +241,7 @@ BETA_ALWAYS_ALLOW_VIEWS = (
     'userena.views.signin', 
     'userena.views.direct_to_user_template', 
     'userena.views.activate',
+    'userpypi.utils._wrapped',
 )
 # BETA_ALWAYS_ALLOW_MODULES
 # BETA_ALLOW_FLATPAGES
