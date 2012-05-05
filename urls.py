@@ -14,6 +14,8 @@ sitemaps = {
 }
 flatpage_pattern = "|".join([x.strip("/") for x in FlatPage.objects.all().values_list('url', flat=True)])
 
+from userrouter.decorators import user_owns
+from userena import views
 
 urlpatterns = patterns('',
     (r'^admin/', include(admin.site.urls)),
@@ -48,8 +50,6 @@ urlpatterns = patterns('',
         name='beta_used'),
 
     # Reset password
-
-
     url(r'^password/reset/$',
         'django.contrib.auth.views.password_reset',
         {'template_name': 'userena/password_reset_form.html',
@@ -67,8 +67,8 @@ urlpatterns = patterns('',
         'django.contrib.auth.views.password_reset_complete',
         {'template_name': 'userena/password_reset_complete.html'}),
     
-    url(r'^(?P<username>[^/]+)/edit/$',
-        'userena.views.profile_edit',
+    url(r'^(?P<username>[\.\w]+)/edit/$',
+        user_owns(views.profile_edit),
         name='userena_profile_edit'),
     
     url(r'^(?P<username>[^/]+)/profile/$',
@@ -76,7 +76,7 @@ urlpatterns = patterns('',
         name='userena_profile_detail'),
     
     (r'(?P<url>%s/)' % flatpage_pattern, 'django.contrib.flatpages.views.flatpage'),
-    
+    (r'404/$', 'django.views.defaults.page_not_found'),
     (r'', include('userrouter.urls')),
 
 )
