@@ -1,1 +1,17 @@
-This is a 404.html
+{% extends "site_base.html" %}
+{% block body %}
+<div class="row">
+    <h1 style="text-align: center;">I had ur page&hellip;</h1>
+</div>
+<div class="row">
+    <div class="span10 offset1">
+        <img src="{{ STATIC_URL }}img/catinthebox.jpg" width="720" height="480" alt="Cat in a box">
+    </div>
+</div>
+<div class="row">
+    <h2 style="text-align: center;">&hellip;but I eeted it.</h2>
+</div>
+<div class="row">
+    <small><cite>photo courtesy <a href="http://www.flickr.com/photos/mcwetboy/4168128978/">http://www.flickr.com/photos/mcwetboy/4168128978/</a></cite></small>
+</div>
+{% endblock %}
