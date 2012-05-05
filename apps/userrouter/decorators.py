@@ -14,7 +14,6 @@ def user_owns(view_func):
     """
     @wraps(view_func)
     def _wrapped_view(request, username, *args, **kwargs):
-        print username, request.user
         if request.user.username != username:
             try:
                 template = loader.get_template("403.html")
