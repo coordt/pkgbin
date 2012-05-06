@@ -1,4 +1,5 @@
 from django.conf.urls.defaults import *
+from django.views.generic.base import TemplateView
 
 from userena.settings import USERENA_ACTIVATION_REQUIRED, USERENA_ACTIVATION_DAYS
 from userena import views
@@ -7,7 +8,7 @@ from userrouter.decorators import user_owns
 
 urlpatterns = patterns('',
     url(r'^(?P<owner>[^/]+)/$',
-        PackageListView.as_view(),
+        TemplateView.as_view(template_name="user_home.html"),
         name="userrouter-index"),
     
     # User Signup

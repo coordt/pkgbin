@@ -1,0 +1,116 @@
+{% extends 'userena/base_userena.html' %}
+{% block title %}{{ request.user }} Home{% endblock %}
+{% block content_title %}
+    <h1>Getting Started with Package Bin</h1>
+{% endblock %}
+{% block content %}
+<article>
+    <section id="uploading-packages">
+        <h2>Uploading Packages</h2>
+        <ol class="arabic">
+            <li>
+                <p class="first">We need to add some stuff to your <tt class="docutils literal"><span class="pre">~/.pypirc</span></tt> configuration file. If you don't have one, you can create one using this example.</p>
+<pre class="literal-block">
+index-servers =
+    pypi
+
+[pypirc]
+servers =
+    pypi
+
+[pypi]
+username:joecool
+password:MyPa55w0rd
+</pre>
+            </li>
+            <li>
+                <p class="first">First add <tt class="docutils literal">pkgbin</tt> under <tt class="docutils literal"><span class="pre">index-servers</span></tt>.</p>
+<pre class="literal-block">
+index-servers =
+    pypi
+    pkgbin
+</pre>
+            </li>
+            <li>
+                <p class="first">Add <tt class="docutils literal">pkgbin</tt> under <tt class="docutils literal">[pypirc] servers</tt>.</p>
+<pre class="literal-block">
+[pypirc]
+servers =
+    pypi
+    pkgbin
+</pre>
+            </li>
+            <li>
+                <p class="first">Add a <tt class="docutils literal">[pkgbin]</tt> section with the username, password and repository lines.</p>
+<pre class="literal-block">
+[pkgbin]
+username:joecool
+password:Pa55w0rd
+repository:http://pkgbin.com/joecool/pypi/
+</pre>
+            </li>
+            <li>
+                <p class="first">Assuming you already have a <tt class="docutils literal">setup.py</tt> file, to upload a package, simply</p>
+<pre class="literal-block">
+python setup.py register -r pkgbin sdist upload -r pkgbin
+</pre>
+            </li>
+        </ol>
+        <p>If you need help getting your package working, check out <a class="reference external" href="http://guide.python-distribute.org/">this guide from the distribute project</a></p>
+    </section>
+    <section id="installation-of-packages">
+        <h2>Installing Packages</h2>
+        <h3>Make pip only use Package Bin</h3>
+        <p>Package Bin is configured to work as a proxy to the public <a class="reference external" href="http://pypi.python.org/pypi/">Python Package Index (PyPI)</a> so it could work as your only index. There are three ways to specify this</p>
+        <ul>
+            <li>
+                <p class="first">Specify it each time:</p>
+<pre class="literal-block">
+pip install --index-url http://username:password&#64;pkgbin.com/username/simple/ mypackage
+</pre>
+            </li>
+            <li>
+                <p class="first">Modify your <a class="reference external" href="http://www.pip-installer.org/en/latest/configuration.html#config-files">pip configuration file</a> and add or update the <tt class="docutils literal">[global]</tt> section:</p>
+<pre class="literal-block">
+[global]
+index-url = http://username:password&#64;pkgbin.com/username/simple/
+</pre>
+            </li>
+            <li>
+                <p class="first">Set <a class="reference external" href="http://www.pip-installer.org/en/latest/configuration.html#environment-variables">an environment variable</a></p>
+<pre class="literal-block">
+export PIP_INDEX_URL=http://username:password&#64;pkgbin.com/username/simple/
+</pre>
+            </li>
+        </ul>
+        <h3>Make pip use Package Bin as a backup source</h3>
+        <p>If you want <tt class="docutils literal">pip</tt> to use Package Bin as a source for packages it can't find on the public PyPI, do one of these methods</p>
+        <ul>
+            <li>
+                <p class="first">Specify it each time:</p>
+<pre class="literal-block">
+pip install --extra-index-url http://username:password&#64;pkgbin.com/username/simple/ mypackage
+</pre>
+            </li>
+            <li>
+                <p class="first">Modify your <a class="reference external" href="http://www.pip-installer.org/en/latest/configuration.html#config-files">pip configuration file</a> and add or update the <tt class="docutils literal">[global]</tt> section:</p>
+<pre class="literal-block">
+[global]
+extra-index-url = http://username:password&#64;pkgbin.com/username/simple/
+</pre>
+            </li>
+            <li>
+                <p class="first">Set <a class="reference external" href="http://www.pip-installer.org/en/latest/configuration.html#environment-variables">an environment variable</a></p>
+<pre class="literal-block">
+export PIP_EXTRA_INDEX_URL=http://username:password&#64;pkgbin.com/username/simple/
+</pre>
+            </li>
+        </ul>
+    </section>
+    <section id="isn-t-this-insecure">
+        <h2>Isn&rsquo;t this insecure?</h2>
+        <p>It isn't optimal security, but it is as far as <tt class="docutils literal">pip</tt> can go right now. If new methods are adopted by <tt class="docutils literal">pip</tt> then we'll support it.</p>
+    </section>
+</article>
+
+{% endblock %}
