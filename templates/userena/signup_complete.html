@@ -1,19 +1,26 @@
-{% extends 'userena/base_userena.html' %}
+{% extends 'site_base.html' %}
 {% load i18n %}
 
-{% block title %}{% trans "Signup almost done!" %}{% endblock %}
+{% block title %}{% trans "Sign Up" %}{% endblock %}
 
-{% block content_title %}<h2>{% trans "Signup" %}</h2>{% endblock %}
+{% trans "Sign Up" %}
 
-{% block content %}
-<p>{% trans "Thank you for signing up with us!" %}</p>
+{% block body %}
+<div class="row">
+    <div class="span6 offset3">
+        <div class="page-header">
+            <h1>{% trans "Confirm Your Email" %}</h1>
+        </div>
+        <p>{% trans "Thank you for signing up with us!" %}</p>
 
-{% if userena_activation_required %}
-<p>{% blocktrans %}You have been send an e-mail with an activation link to the supplied email.{% endblocktrans %}</p>
-<p>{% blocktrans %}We will store your signup information for {% endblocktrans %}
-    {{ userena_activation_days }} 
-    {% blocktrans %}days on our server.{% endblocktrans %}</p>
-{% else  %}
-<p>{% blocktrans %}You can now use the supplied credentials to signin.{% endblocktrans %}</p>
-{% endif %}
+        {% if userena_activation_required %}
+        <p>{% blocktrans %}You have been send an e-mail with an activation link to the supplied email.{% endblocktrans %}</p>
+        <p>{% blocktrans %}We will store your signup information for {% endblocktrans %}
+            {{ userena_activation_days }} 
+            {% blocktrans %}days on our server.{% endblocktrans %}</p>
+        {% else  %}
+        <p>{% blocktrans %}You can now use the supplied credentials to sign in.{% endblocktrans %}</p>
+        {% endif %}
+    </div>
+</div>
 {% endblock %}

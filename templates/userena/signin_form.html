@@ -1,34 +1,38 @@
-{% extends 'userena/base_userena.html' %}
+{% extends 'site_base.html' %}
 {% load i18n %}
+{% block head_title %}
+    {% block title %}{% trans "Sign In" %}{% endblock %}
+{% endblock %}
 
-{% block title %}{% trans "Signin" %}{% endblock %}
-
-{% block content %}
+{% block body %}
 <div class="row">
     <div class="span6 offset3">
-<form action="" method="post" class="form-horizontal">{% csrf_token %}
-  <fieldset>
-    <legend>{% trans "Signin" %}</legend>
-    {{ form.non_field_errors }}
-    {% for field in form %}
-    {% comment %} Displaying checkboxes differently {% endcomment %}
-    {% if field.name == 'remember_me' %}
-    <div class="controls{% if field.errors %} error{% endif %}">
-    <label for="id_{{ field.name }}" class="checkbox">{{ field }} {{ field.label }}</label>
-    <span class="help-inline">{{ field.errors }}</span>
+        <div class="page-header">
+            <h1>{% trans "Sign In" %}</h1>
+        </div>
+        <form action="" method="post" class="form-horizontal">{% csrf_token %}
+            <fieldset>
+                {{ form.non_field_errors }}
+                {% for field in form %}
+                    {% comment %} Displaying checkboxes differently {% endcomment %}
+                    {% if field.name == 'remember_me' %}
+                    <div class="controls{% if field.errors %} error{% endif %}">
+                        <label for="id_{{ field.name }}" class="checkbox">{{ field }} {{ field.label }}</label>
+                        <span class="help-inline">{{ field.errors }}</span>
+                    </div>
+                    {% else %}
+                    <div class="control-group{% if field.errors %} error{% endif %}">
+                        <label for="id_{{ field.name }}" class="control-label">{{ field.label }}</label>
+                        <div class="controls">{{ field }}<span class="help-inline">{{ field.errors }}</span></div>
+                    </div>
+                    {% endif %}
+                {% endfor %}
+            </fieldset>
+            <div class="form-actions">
+                <p><input type="submit" class="btn btn-primary" value="{% trans "Sign In"%}" /></p>
+                <p><a href="{% url userena_password_reset %}" class="btn btn-small" title="{% trans "Forgot your password?" %}">{% trans "Forgot your password?" %}</a></p>
+            </div>
+        </form>
     </div>
-    {% else %}
-    <div class="control-group{% if field.errors %} error{% endif %}">
-        <label for="id_{{ field.name }}" class="control-label">{{ field.label }}</label>
-        <div class="controls">{{ field }}<span class="help-inline">{{ field.errors }}</span></div>
-    </div>
-    {% endif %}
-    {% endfor %}
-  </fieldset>
-  <div class="form-actions">
-      <input type="submit" class="btn btn-primary" value="{% trans "Signin"%}" />
-   <a href="{% url userena_password_reset %}" class="btn" title="{% trans "Forgot your password?" %}">{% trans "Forgot your password?" %}</a>
-  </div>
-</form>
-</div></div>
+</div>
 {% endblock %}

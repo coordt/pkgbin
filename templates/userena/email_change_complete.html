@@ -1,8 +1,8 @@
 {% extends 'userena/base_userena.html' %}
 {% load i18n %}
 
-{% block title %}{% trans "Email verification" %}{% endblock %}
-{% block content_title %}<h2>{% trans 'Confirm your new email' %}</h2>{% endblock %}
+{% block title %}{% trans "Email Verification" %}{% endblock %}
+{% block content_title %}<h1>{% trans 'Verify Your new Email Address' %}</h1>{% endblock %}
 
 {% block content %}
 <p>{% blocktrans with viewed_user.userena_signup.email_unconfirmed as email %}You have received an email at {{ email }}.{% endblocktrans %}</p>

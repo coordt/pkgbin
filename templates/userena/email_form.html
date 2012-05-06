@@ -1,25 +1,18 @@
 {% extends 'userena/base_userena.html' %}
 {% load i18n %}
-
-{% block content_title %}<h2>{% blocktrans with user.username as username %}Account &raquo; {{ username }}{% endblocktrans %}</h2>{% endblock %}
+{% block title %}{% trans "Change Your Email Address" %}{% endblock %}
+{% block content_title %}<h1>{% trans "Change Your Email Address" %}</h1>{% endblock %}
 
 {% block content %}
 <form action="" method="post" class="form-horizontal">{% csrf_token %}
-  <ul id="box-nav" class="nav nav-tabs">
-    <li class="first"><a href="{% url userena_profile_detail user.username %}"><span>{% trans 'View profile' %}</span></a></li>
-    <li><a href="{% url userena_profile_edit user.username %}">{% trans "Edit profile" %}</a></li>
-    <li><a href="{% url userena_password_change user.username %}">{% trans "Change password" %}</a></li>
-    <li class="last selected active"><a href="{% url userena_email_change user.username %}">{% trans "Change email" %}</a></li>
-  </ul>
   {% csrf_token %}
   <fieldset>
-    <legend>{% trans "Change email address" %}</legend>
       {% for field in form %}
           <div class="control-group{% if field.errors %} error{% endif %}">
             <label class="control-label" for="id_{{ field.name }}">{{ field.label }}</label>
             <div class="controls">
-              {{ field}}
-              <p class="help-block">{{ field.help_text}} {{ field.errors}}</p>
+              {{ field }}
+              <p class="help-block">{{ field.help_text }} {{ field.errors }}</p>
             </div>
           </div>
       {% endfor %}

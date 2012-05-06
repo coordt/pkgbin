@@ -1,18 +1,20 @@
-{% extends "site_base.html" %}
+{% extends "userena/base_userena.html" %}
 {% load i18n %}
-{% block head_title %}{{ release }}{% endblock %}
+{% block title %}{{ release }}{% endblock %}
 {% block extra_head %}
     <link rel="stylesheet" href="{{ STATIC_URL }}css/rstbody.css" type="text/css" media="screen">
-    <link rel="meta" title="DOAP" type="application/rdf+xml" href="{% url userpypi-release-doap username=username package=release.package.name version=release.version %}"/> 
+    <link rel="meta" title="DOAP" type="application/rdf+xml" href="{% url userpypi-release-doap owner=request.user.username package=release.package.name version=release.version %}"/> 
 {% endblock %}
-{% block body %}
+{% block content_title %}
     <h1>{{ release.package.name }}
         {% for r in release.package.releases.all %}
-<a class="label{% if r.version == release.version %} label-info{% endif %}" href="{% url userpypi-release username r.package.name r.version %}">{{ r.version }}</a>
+<a class="label{% if r.version == release.version %} label-info{% endif %}" href="{% url userpypi-release owner=request.user.username package=r.package.name version=r.version %}">{{ r.version }}</a>
         {% endfor %}
     </h1>
+{% endblock %}
+{% block content %}
     {% ifnotequal release release.package.latest %}
-    <div>Latest: <a href="{% url userpypi-release username=username package=release.package.name version=release.package.latest %}">{{ release.package.latest }}</a></div>
+    <div>Latest: <a href="{% url userpypi-release owner=request.user.username package=release.package.name version=release.package.latest %}">{{ release.package.latest }}</a></div>
     {% endifnotequal %}
     <ul class="nav nav-tabs">
       <li class="active"><a href="#description" data-toggle="tab">{% trans "Description" %}</a></li>
