@@ -1,6 +1,10 @@
 {% extends "userena/base_userena.html" %}
 {% load bootstrap i18n %}
 {% block title %}Manage {{ package.name }}{% endblock %}
+{% block extra_head %}
+    <link rel="stylesheet" href="//ajax.googleapis.com/ajax/libs/jqueryui/1.8.13/themes/ui-lightness/jquery-ui.css" type="text/css" />
+    {{ maintainer_formset.media.css }}
+{% endblock %}
 {% block content_title %}
     <h1>{{ package.name }} {% for r in package.releases.all %}
         <a class="label" href="{% url userpypi-release r.package.owner.username r.package.name r.version %}">{{ r.version }}</a>
@@ -17,10 +21,48 @@
         <li class="active"><a href="{% url userpypi-package-manage request.user package.name %}">{% trans "Manage" %}</a></li>
     {% endif %}
 </ul>
-<form action="" method="post" class="form-horizontal">{% csrf_token %}
+<form id="package-mgmt-form" action="" method="post" class="form-horizontal">{% csrf_token %}
 {{ form|bootstrap }}
+{{ maintainer_formset.management_form }}
+<table class="table">
+    <thead>
+        <tr>
+            <th>User</th><th>Permission</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for maintainer in maintainer_formset %}
+        <tr class="form-container">
+            <td>
+                {% if form.instance.pk %}{{ maintainer.DELETE }}{% endif %}
+                {{ maintainer.id }}
+                {{ maintainer.user }}
+            </td>
+            <td>
+                {{ maintainer.permission }}
+            </td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+
 <div class="form-actions">
     <input type="submit" class="btn btn-primary" value="{% trans "Save" %}" />
 </div>
 
+{% endblock %}
+{% block extra_body %}
+<script type="text/javascript" src="//ajax.googleapis.com/ajax/libs/jquery/1.4.4/jquery.min.js"></script>
+<script type="text/javascript" src="//ajax.googleapis.com/ajax/libs/jqueryui/1.8.13/jquery-ui.min.js"></script>
+<script type="text/javascript" src="{{ STATIC_URL }}js/jquery.formset.js"></script>
+<script type="text/javascript">
+    $(function() {
+        $('.form-container').formset({
+            prefix: '{{ maintainer_formset.prefix }}',
+            added: bindSelectables
+        });
+    })
+</script>
+
+{{ maintainer_formset.media.js }}
 {% endblock %}

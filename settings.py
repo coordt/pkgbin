@@ -157,6 +157,7 @@ INSTALLED_APPS = (
     'queued_storage',
     #"kombu.transport.django",
     'hunger',
+    'selectable',
 )
 
 ADMIN_TOOLS_THEMING_CSS = 'calloway/admin/css/theming.css'
@@ -253,6 +254,12 @@ BETA_SIGNUP_URL = '/signup/'
 # BETA_EMAIL_MODULE
 # BETA_EMAIL_CONFIRM_FUNCTION
 # BETA_EMAIL_INVITE_FUNCTION
+
+SELECTABLEWRAPPER_SETTINGS = {
+    'AUTOCOMPLETESELECT_FIELDS': {
+        'userpypi.maintainer.user': 'lookups.UserLookup'
+    }
+}
 
 
 try:
