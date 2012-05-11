@@ -21,7 +21,8 @@ urlpatterns = patterns('',
     (r'^admin/', include(admin.site.urls)),
     (r'^$', TemplateView.as_view(template_name='homepage.html')),
     (r'^admin_tools/', include('admin_tools.urls')),
-
+    (r'^selectable/', include('selectable.urls')),
+    
     # Signup, signin and signout
 
     url(r'^signup/$',

@@ -3,22 +3,25 @@
 
 --extra-index-url=http://callowayproject.com/pypi/
 
+Django==1.4
+Pillow==1.7.6
 calloway==0.4.2
 celery==2.5.1
-django
 django-admin-tools==0.4.1
 django-bootstrap-form==2.0.3
 django-celery==2.5.1
 django-cumulus==1.0.5
 django-guardian==1.0.4
-django-tinymce
-django-tinymcewrapper
+django-hunger==1.0.6
 django-queued-storage==0.5
+django-selectable==0.4.1
+django-selectablewrapper==0.1
+django-templated-email==0.4.4
+django-tinymce==1.5.1b2
+django-tinymcewrapper==0.3
 django-userena==1.0.3
 easy-thumbnails==1.0-alpha-21
-pillow
 python-memcached==1.45
-redis
-userpypi==0.5.1
-django-hunger==1.0.6
+redis==2.4.11
+userpypi==0.5.2
 psycopg2
