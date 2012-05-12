@@ -17,6 +17,7 @@
         <li><a href="{% url userpypi-package-index owner=request.user.username %}">Package List</a></li>
         <li><a href="{% url userpypi-release-list owner=request.user.username %}">Latest Releases</a></li>
         <li class="nav-header">Help!</li>
+        <li><a href="{% url userrouter-index owner=request.user.username %}">Getting Started</a></li>
         <li><a href="https://groups.google.com/forum/#!forum/package-bin-discussion">Package Bin discussion group</a></li>
         <li><a href="https://github.com/coordt/pkgbin/issues">Package Bin Issues</a></li>
         <li><a href="mailto:support@pkgbin.com?subject=Help">Package Bin Support E-Mail</a></li>
