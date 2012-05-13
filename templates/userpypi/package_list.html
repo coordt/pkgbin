@@ -5,6 +5,8 @@
 {% block content_title %}<h1>{% trans "Package Index" %}</h1>{% endblock %}
 
 {% block content %}
+{% if package_list %}
+<h2>{% trans "Packages you own" %}</h2>
 <table class="table table-striped table-condensed">
     <thead></thead>
     <tbody>
@@ -18,4 +20,22 @@
         {% endfor %}
     </tbody>
 </table>
+{% endif %}
+{% if request.user.maintainer_set.all %}
+<h2>{% trans "Packages shared with you" %}</h2>
+<table class="table table-striped table-condensed">
+    <thead></thead>
+    <tbody>
+        {% for package in request.user.maintainer_set.all %}
+        <tr>
+            <td>
+                <strong>{{ package.package.name }}</strong>, owned by {{ package.package.owner }}.
+                You can download packages{% if package.permission == 2 %}and upload new packages{% endif %}.
+                {% if package.package.latest and package.package.latest.summary %}<p>{{ package.latest.summary }}</p>{% endif %}
+            </td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+{% endif %}
 {% endblock %}
