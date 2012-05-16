@@ -7,6 +7,7 @@ Django==1.4
 Pillow==1.7.6
 calloway==0.4.2
 celery==2.5.1
+docutils==0.7
 django-admin-tools==0.4.1
 django-bootstrap-form==2.0.3
 django-celery==2.5.1
