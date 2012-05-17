@@ -172,7 +172,8 @@ LOGOUT_URL = '/accounts/signout/'
 
 DJANGOPYPI_SETTINGS = {
     'PROXY_MISSING': True,
-    'RELEASE_FILE_STORAGE': 'cumulus.storage.CloudFilesStorage',
+    'RELEASE_FILE_STORAGE': 'media_storage.QueuedUserCloudFilesStorage',
+    'RELEASE_UPLOAD_TO': lambda x,y: "%s/%s" % (x.release.package.owner.username, y)
 }
 
 #######################
