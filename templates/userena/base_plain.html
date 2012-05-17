@@ -1,0 +1,17 @@
+{% extends 'site_base.html' %}
+
+{% block head_title %}
+    {% block title %}{% endblock %}
+{% endblock %}
+{% block body %}
+<section>
+    <div class="row">
+    <div class="span3"></div>
+    <div class="span9">
+        <div class="page-header">
+            {% block content_title %}{% endblock %}
+        </div>
+        {% block content %}{% endblock %}</div>
+    </div>
+</section>
+{% endblock %}
