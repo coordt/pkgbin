@@ -247,6 +247,7 @@ BETA_ALWAYS_ALLOW_VIEWS = (
     'userpypi.utils._wrapped',
     'tastypie.api.wrapper',
     'tastypie.resources.wrapper',
+    'userpypi.views.root',
 )
 # BETA_ALWAYS_ALLOW_MODULES
 # BETA_ALLOW_FLATPAGES
