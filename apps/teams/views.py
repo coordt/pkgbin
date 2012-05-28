@@ -35,7 +35,7 @@ def create_team(request, username):
             HttpResponseRedirect(reverse('update_team', args=(form.cleaned_data["name"],)))
     else:
         form = TeamCreationForm(initial={'creator': request.user.pk})
-    return render_to_response('team/team_create.html', 
+    return render_to_response('teams/team_create.html', 
         {'form': form, 'username': username},
         context_instance=RequestContext(request))
 
