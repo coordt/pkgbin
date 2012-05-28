@@ -7,21 +7,19 @@
 <section>
     <div class="row">
     <div class="span3">
-    <ul class="nav nav-list well">
-        <li class="nav-header">Account Information</li>
-        <li><a href="{% url userena_profile_detail username=request.user.username %}">View Profile</a></li>
-        <li><a href="{% url userena_profile_edit username=request.user.username %}">Edit Profile</a></li>
-        <li><a href="{% url userena_password_change username=request.user.username %}">Change Password</a></li>
-        <li><a href="{% url userena_email_change username=request.user.username %}">Change Email Address</a></li>
-        <li class="nav-header">Package Information</li>
-        <li><a href="{% url userpypi-package-index owner=request.user.username %}">Package List</a></li>
-        <li><a href="{% url userpypi-release-list owner=request.user.username %}">Latest Releases</a></li>
-        <li class="nav-header">Help!</li>
-        <li><a href="{% url userrouter-index owner=request.user.username %}">Getting Started</a></li>
-        <li><a href="https://groups.google.com/forum/#!forum/package-bin-discussion">Package Bin discussion group</a></li>
-        <li><a href="https://github.com/coordt/pkgbin/issues">Package Bin Issues</a></li>
-        <li><a href="mailto:support@pkgbin.com?subject=Help">Package Bin Support E-Mail</a></li>
-    </ul>
+        {% if not profile %}
+            {% if owner %}
+                {% with profile=owner.profile %}
+                    {% include "leftrail.html" %}
+                {% endwith %}
+            {% else %}
+                {% with profile=request.user.profile %}
+                    {% include "leftrail.html" %}
+                {% endwith %}
+            {% endif %}
+        {% else %}
+            {% include "leftrail.html" %}
+        {% endif %}
     </div>
     <div class="span9">
         <div class="page-header">

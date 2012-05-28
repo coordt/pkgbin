@@ -1,0 +1,81 @@
+{% extends "userena/base_userena.html" %}
+{% load bootstrap i18n %}
+{% block title %}Manage {{ profile.user.username }}{% endblock %}
+{% block extra_head %}
+    <link rel="stylesheet" href="//ajax.googleapis.com/ajax/libs/jqueryui/1.8.13/themes/ui-lightness/jquery-ui.css" type="text/css" />
+    {{ member_formset.media.css }}
+{% endblock %}
+{% block content_title %}
+    <h1>{{ profile.user.username }} Members</h1>
+{% endblock %}
+{% block content %}
+
+<form id="package-mgmt-form" action="" method="post" class="form-vertical">{% csrf_token %}
+{{ form|bootstrap }}
+{{ member_formset.management_form }}
+{% if member_formset.non_field_errors %}
+    <div class="control-group error">
+        <div class="controls">
+            {% for error in member_formset.non_field_errors %}
+                <span class="help-inline">{{ error }}</span>
+            {% endfor %}
+        </div>
+    </div>
+{% endif %}
+<table class="table">
+    <thead>
+        <tr>
+            <th>User</th><th>Permission</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for member in member_formset %}
+        <tr class="form-container">
+            <td>
+                {% if member.instance.pk %}{% if not member.instance.creator %}
+                    {{ member.DELETE }}
+                {% endif %}{% endif %}
+                <div class="control-group{% if member.user.errors %} error{% endif %}">
+                <div class="controls">
+                    {{ member.user }}
+
+                    {% for error in member.user.errors %}
+                        <span class="help-inline">{{ error }}</span>
+                    {% endfor %}
+
+                    {% if member.user.help_text %}
+                    <p class="help-block">
+                        {{ member.user.help_text }}
+                    </p>
+                    {% endif %}
+                </div>
+                </div>
+            </td>
+            <td>
+                {{ member.permission }}
+            </td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+
+<div class="form-actions">
+    <input type="submit" class="btn btn-primary" value="{% trans "Save" %}" />
+</div>
+
+{% endblock %}
+{% block extra_body %}
+<script type="text/javascript" src="//ajax.googleapis.com/ajax/libs/jquery/1.4.4/jquery.min.js"></script>
+<script type="text/javascript" src="//ajax.googleapis.com/ajax/libs/jqueryui/1.8.13/jquery-ui.min.js"></script>
+<script type="text/javascript" src="{{ STATIC_URL }}js/jquery.formset.js"></script>
+<script type="text/javascript">
+    $(function() {
+        $('.form-container').formset({
+            prefix: '{{ member_formset.prefix }}',
+            added: bindSelectables
+        });
+    })
+</script>
+
+{{ member_formset.media.js }}
+{% endblock %}

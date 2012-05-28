@@ -159,6 +159,7 @@ INSTALLED_APPS = (
     'hunger',
     'selectable',
     'tastypie',
+    'teams',
 )
 
 ADMIN_TOOLS_THEMING_CSS = 'calloway/admin/css/theming.css'
