@@ -37,6 +37,7 @@
                 {% endif %}{% endif %}
                 <div class="control-group{% if member.user.errors %} error{% endif %}">
                 <div class="controls">
+                    {{ member.id }}
                     {{ member.user }}
 
                     {% for error in member.user.errors %}
