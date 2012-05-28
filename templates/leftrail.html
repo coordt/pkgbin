@@ -1,0 +1,27 @@
+<ul class="nav nav-list well">
+    <li><h3>{{ profile.user.username }}</h3></li>
+    {% if request.user == profile.user %}
+        <li class="nav-header">Account Information</li>
+        <li><a href="{% url userena_profile_detail username=request.user.username %}">View Profile</a></li>
+        <li><a href="{% url userena_profile_edit username=request.user.username %}">Edit Profile</a></li>
+        <li><a href="{% url userena_password_change username=request.user.username %}">Change Password</a></li>
+        <li><a href="{% url userena_email_change username=request.user.username %}">Change Email Address</a></li>
+        <li class="nav-header">Teams</li>
+            {% for teammember in profile.user.memberships.all %}
+                <li><a href="{% url userrouter-index username=teammember.team.username %}">{{ teammember.team.username }}</a></li>
+            {% endfor %}
+            <li><a href="{% url create_team username=request.user.username %}">Create a team&hellip;</a></li>
+    {% endif %}
+    {% if profile.organization %}
+        <li class="nav-header">Team Information</li>
+        <li><a href="{% url update_team username=profile.user.username %}">Membership</a></li>
+    {% endif %}
+    <li class="nav-header">Package Information</li>
+    <li><a href="{% url userpypi-package-index owner=profile.user.username %}">Package List</a></li>
+    <li><a href="{% url userpypi-release-list owner=profile.user.username %}">Latest Releases</a></li>
+    <li class="nav-header">Help!</li>
+    <li><a href="{% url userrouter-index username=profile.user.username %}">Getting Started</a></li>
+    <li><a href="https://groups.google.com/forum/#!forum/package-bin-discussion">Package Bin discussion group</a></li>
+    <li><a href="https://github.com/coordt/pkgbin/issues">Package Bin Issues</a></li>
+    <li><a href="mailto:support@pkgbin.com?subject=Help">Package Bin Support E-Mail</a></li>
+</ul>
