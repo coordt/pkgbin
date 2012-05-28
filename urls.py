@@ -17,10 +17,11 @@ flatpage_pattern = "|".join([x.strip("/") for x in FlatPage.objects.all().values
 from userrouter.decorators import user_owns
 from userena import views
 from tastypie.api import Api
-from api import UserResource
+from api import UserResource, PackageResource
 
 v1_api = Api(api_name='v1')
 v1_api.register(UserResource())
+v1_api.register(PackageResource())
 
 urlpatterns = patterns('',
     (r'^admin/', include(admin.site.urls)),
