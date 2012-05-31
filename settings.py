@@ -160,6 +160,7 @@ INSTALLED_APPS = (
     'selectable',
     'tastypie',
     'teams',
+    'robots',
 )
 
 ADMIN_TOOLS_THEMING_CSS = 'calloway/admin/css/theming.css'
@@ -249,6 +250,7 @@ BETA_ALWAYS_ALLOW_VIEWS = (
     'tastypie.api.wrapper',
     'tastypie.resources.wrapper',
     'userpypi.views.root',
+    'robots.views.rules_list',
 )
 # BETA_ALWAYS_ALLOW_MODULES
 # BETA_ALLOW_FLATPAGES

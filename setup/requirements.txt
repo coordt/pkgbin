@@ -15,6 +15,7 @@ django-cumulus==1.0.5
 django-guardian==1.0.4
 django-hunger==1.0.6
 django-queued-storage==0.5
+django-robots==0.8.1
 django-selectable==0.4.1
 django-selectablewrapper==0.1
 django-tastypie==0.9.11

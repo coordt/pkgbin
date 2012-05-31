@@ -84,6 +84,7 @@ urlpatterns = patterns('',
     
     (r'(?P<url>%s/)' % flatpage_pattern, 'django.contrib.flatpages.views.flatpage'),
     (r'404/$', 'django.views.defaults.page_not_found'),
+    (r'^robots\.txt$', include('robots.urls')),
     (r'', include('userrouter.urls')),
 
 )
