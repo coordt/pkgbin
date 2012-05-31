@@ -68,6 +68,11 @@ class PackageResource(ModelResource):
             name="api_dispatch_detail"),
         ]
     
+    def obj_get(self, request=None, **kwargs):
+        owner = kwargs.pop('owner')
+        kwargs['owner__username'] = owner
+        return super(PackageResource, self).obj_get(request, **kwargs)
+    
     def get_resource_uri(self, bundle_or_obj):
         """
         Handles generating a resource URI for a single resource.
@@ -77,7 +82,7 @@ class PackageResource(ModelResource):
         kwargs = {
             'resource_name': self._meta.resource_name,
         }
-    
+        
         if isinstance(bundle_or_obj, Bundle):
             kwargs['name'] = bundle_or_obj.obj.name
             kwargs['owner'] = bundle_or_obj.obj.owner.username
