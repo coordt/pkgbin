@@ -13,8 +13,8 @@ WSGIPassAuthorization On
 	ErrorLog /var/log/apache2/pkgbin.error.log
 	CustomLog /var/log/apache2/pkgbin.access.log combined
 	
-	Alias /favicon.ico /var/sites/pkgbin/deployed/media/img/favicon.ico
-	Alias /apple-touch-icon.png /var/sites/pkgbin/deployed/media/img/apple-touch-icon.png
+	Alias /favicon.ico /var/sites/pkgbin/deployed/media/static/img/favicon.ico
+	Alias /apple-touch-icon.png /var/sites/pkgbin/deployed/media/static/img/apple-touch-icon.png
 	Alias /media /var/sites/pkgbin/deployed/media
 	<Directory /var/sites/pkgbin/deployed/media>
 		SetHandler None
