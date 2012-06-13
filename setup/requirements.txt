@@ -24,5 +24,5 @@ django-userena==1.0.3
 easy-thumbnails==1.0-alpha-21
 python-memcached==1.45
 redis==2.4.11
-userpypi==0.5.2
+userpypi==0.5.7
 psycopg2
