@@ -1,0 +1,14 @@
+{% extends 'site_base.html' %}
+{% load i18n %}
+{% block title %}{% trans "Invalid Invitation Code" %}{% endblock %}
+
+{% block body %}
+
+<div class="row">
+  <div class="span6 offset3">
+    <h3>That invitation code is invalid.</h3>
+      <p>That code has either expired or already been used.</p>
+  </div>
+</div>
+
+{% endblock %}
