@@ -16,9 +16,16 @@ flatpage_pattern = "|".join([x.strip("/") for x in FlatPage.objects.all().values
 
 from userrouter.decorators import user_owns
 from userena import views
+from tastypie.api import Api
+from api import UserResource, PackageResource
+
+v1_api = Api(api_name='v1')
+v1_api.register(UserResource())
+v1_api.register(PackageResource())
 
 urlpatterns = patterns('',
     (r'^admin/', include(admin.site.urls)),
+    (r'^api/', include(v1_api.urls)),
     (r'^$', TemplateView.as_view(template_name='homepage.html')),
     (r'^admin_tools/', include('admin_tools.urls')),
     (r'^selectable/', include('selectable.urls')),
@@ -68,16 +75,16 @@ urlpatterns = patterns('',
         'django.contrib.auth.views.password_reset_complete',
         {'template_name': 'userena/password_reset_complete.html'}),
     
-    url(r'^(?P<username>[\.\w]+)/edit/$',
-        user_owns(views.profile_edit),
-        name='userena_profile_edit'),
-    
-    url(r'^(?P<username>[^/]+)/profile/$',
-        'userena.views.profile_detail',
-        name='userena_profile_detail'),
+    url(r'^(?P<username>[^/]+)/create_team/$',
+        'teams.views.create_team',
+        name='create_team'),
+    url(r'^(?P<username>[^/]+)/members/$',
+        'teams.views.update_team',
+        name='update_team'),
     
     (r'(?P<url>%s/)' % flatpage_pattern, 'django.contrib.flatpages.views.flatpage'),
     (r'404/$', 'django.views.defaults.page_not_found'),
+    (r'^robots\.txt$', include('robots.urls')),
     (r'', include('userrouter.urls')),
 
 )

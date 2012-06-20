@@ -14,7 +14,12 @@ def user_owns(view_func):
     """
     @wraps(view_func)
     def _wrapped_view(request, username, *args, **kwargs):
-        if request.user.username != username:
+        if hasattr(request.user, 'memberships'):
+            usernames = [x.team.username for x in request.user.memberships.all()]
+        else:
+            usernames = []
+        usernames.append(request.user.username)
+        if username not in usernames:
             try:
                 template = loader.get_template("403.html")
             except TemplateDoesNotExist:

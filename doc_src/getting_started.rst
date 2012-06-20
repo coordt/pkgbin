@@ -10,6 +10,7 @@ User accounts
 Managing packages
    Alter your .pypirc ::
    
+      [distutils]
       index-servers =
           pypi
           pkgbin

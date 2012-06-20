@@ -158,6 +158,9 @@ INSTALLED_APPS = (
     #"kombu.transport.django",
     'hunger',
     'selectable',
+    'tastypie',
+    'teams',
+    'robots',
 )
 
 ADMIN_TOOLS_THEMING_CSS = 'calloway/admin/css/theming.css'
@@ -244,6 +247,10 @@ BETA_ALWAYS_ALLOW_VIEWS = (
     'userena.views.direct_to_user_template', 
     'userena.views.activate',
     'userpypi.utils._wrapped',
+    'tastypie.api.wrapper',
+    'tastypie.resources.wrapper',
+    'userpypi.views.root',
+    'robots.views.rules_list',
 )
 # BETA_ALWAYS_ALLOW_MODULES
 # BETA_ALLOW_FLATPAGES

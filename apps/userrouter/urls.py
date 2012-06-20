@@ -5,10 +5,12 @@ from userena.settings import USERENA_ACTIVATION_REQUIRED, USERENA_ACTIVATION_DAY
 from userena import views
 from userpypi.views.packages import PackageListView
 from userrouter.decorators import user_owns
+from profiles.forms import LimitedEditProfileForm
 
 urlpatterns = patterns('',
-    url(r'^(?P<owner>[^/]+)/$',
-        TemplateView.as_view(template_name="user_home.html"),
+    url(r'^(?P<username>[^/]+)/$',
+        user_owns(views.direct_to_user_template),
+        {'template_name':"user_home.html"},
         name="userrouter-index"),
     
     # User Signup
@@ -58,7 +60,12 @@ urlpatterns = patterns('',
     # Edit profile
     url(r'^(?P<username>[\.\w]+)/edit/$',
         user_owns(views.profile_edit),
+        {'edit_profile_form': LimitedEditProfileForm},
         name='userena_profile_edit'),
+    
+    url(r'^(?P<username>[^/]+)/profile/$',
+        'userena.views.profile_detail',
+        name='userena_profile_detail'),
     
     ('', include('userpypi.urls')),
 )
