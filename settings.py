@@ -250,6 +250,7 @@ BETA_ALWAYS_ALLOW_VIEWS = (
     'tastypie.api.wrapper',
     'tastypie.resources.wrapper',
     'userpypi.views.root',
+    'userpypi.views.packages.PackageListView',
     'robots.views.rules_list',
 )
 # BETA_ALWAYS_ALLOW_MODULES
