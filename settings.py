@@ -246,11 +246,12 @@ BETA_ALWAYS_ALLOW_VIEWS = (
     'userena.views.signin', 
     'userena.views.direct_to_user_template', 
     'userena.views.activate',
-    'userpypi.utils._wrapped',
     'tastypie.api.wrapper',
     'tastypie.resources.wrapper',
+    'userpypi.utils._wrapped',
     'userpypi.views.root',
     'userpypi.views.packages.PackageListView',
+    'userpypi.views.packages.PackageDetailView',
     'robots.views.rules_list',
 )
 # BETA_ALWAYS_ALLOW_MODULES
