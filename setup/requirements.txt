@@ -27,5 +27,5 @@ easy-thumbnails==1.0-alpha-21
 psycopg2
 python-memcached==1.45
 redis==2.4.11
-userpypi==0.5.7
+userpypi==0.5.8
 uuid==1.30
