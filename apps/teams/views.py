@@ -49,7 +49,7 @@ def update_team(request, username):
 
     if not obj.get_profile().organization:
         raise Http404
-    
+
     # Check that requesting user has admin privileges on this team
     if not request.user.has_perm('admin', obj):
         try:
@@ -58,7 +58,7 @@ def update_team(request, username):
             return http.HttpResponseForbidden('<h1>403 Forbidden</h1>')
 
     # Should prevent the deletion of the creator user. Not sure how to do this
-    
+
     if request.method == 'POST':
         form = TeamUpdateForm(request.POST, instance=obj)
         if form.is_valid():
@@ -71,13 +71,12 @@ def update_team(request, username):
     else:
         form = TeamUpdateForm(instance=obj)
         member_formset = TeamMemberFormset(instance=obj)
-    
+
     t = loader.get_template(template_name)
     c = RequestContext(request, {
         'form': form,
         'member_formset': member_formset,
         'profile': obj.get_profile(),
     })
-    response = HttpResponse(t.render(c))
-    return response
+    return HttpResponse(t.render(c))
     

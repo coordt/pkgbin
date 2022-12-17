@@ -52,14 +52,17 @@ class BetaMiddleware(object):
         self.allow_flatpages = getattr(settings, 'BETA_ALLOW_FLATPAGES', [])
 
     def process_view(self, request, view_func, view_args, view_kwargs):
-        if request.path in self.allow_flatpages or '%s/' % request.path in self.allow_flatpages:
+        if (
+            request.path in self.allow_flatpages
+            or f'{request.path}/' in self.allow_flatpages
+        ):
             from django.contrib.flatpages.views import flatpage
             return flatpage(request, request.path_info)
 
         if not self.enable_beta:
             #Do nothing is beta is not activated
             return
-        
+
         invitation_code = request.COOKIES.get('invitation_code', '')
         in_beta, exists = InvitationCode.validate_code(invitation_code)
         whitelisted_modules = ['django.contrib.auth.views',
@@ -68,14 +71,17 @@ class BetaMiddleware(object):
                                'django.contrib.staticfiles.views',
                                'hunger.views']
 
-        full_view_name = '%s.%s' % (view_func.__module__, view_func.__name__)
+        full_view_name = f'{view_func.__module__}.{view_func.__name__}'
 
         #Check modules
         if self.always_allow_modules:
             whitelisted_modules += self.always_allow_modules
 
         #if view in module then ignore - except if view is signup confirmation
-        if '%s' % view_func.__module__ in whitelisted_modules and not full_view_name == self.signup_confirmation_view:
+        if (
+            f'{view_func.__module__}' in whitelisted_modules
+            and full_view_name != self.signup_confirmation_view
+        ):
             return
 
         #Check views
@@ -98,13 +104,13 @@ class BetaMiddleware(object):
         if full_view_name in self.signup_views and in_beta:
             #if beta code is valid and trying to register then let them through
             return
-        else:
-            # next_page = request.META.get('REQUEST_URI')
-            next_page = request.path
-            if in_beta:
-                return HttpResponseRedirect(self.signup_url + '?next=%s' % next_page)
-            else:
-                return HttpResponseRedirect(self.redirect_url + '?next=%s' % next_page)
+        # next_page = request.META.get('REQUEST_URI')
+        next_page = request.path
+        return (
+            HttpResponseRedirect(f'{self.signup_url}?next={next_page}')
+            if in_beta
+            else HttpResponseRedirect(f'{self.redirect_url}?next={next_page}')
+        )
 
     def process_response(self, request, response):
         try:

@@ -22,7 +22,7 @@ class UserLookup(ModelLookup):
 
     def get_item_label(self, item):
         # Display for choice listings
-        return u"%s (%s)" % (item.username, item.get_full_name())
+        return f"{item.username} ({item.get_full_name()})"
 try:
     registry.register(UserLookup)
 except LookupAlreadyRegistered:
@@ -40,7 +40,7 @@ class TeamCreationForm(forms.Form):
     def clean_name(self):
         org_name = self.cleaned_data['name']
         if User.objects.filter(username=org_name).count():
-            raise forms.ValidationError('%s is not a unique name.' % org_name)
+            raise forms.ValidationError(f'{org_name} is not a unique name.')
         return org_name
 
 
@@ -62,7 +62,9 @@ class TeamMemberForm(forms.ModelForm):
         else:
             users = TeamMember.objects.filter(team=team, user=user).count()
         if users > 0:
-            raise forms.ValidationError("%s is already a member of the team." % user.username)
+            raise forms.ValidationError(
+                f"{user.username} is already a member of the team."
+            )
         return user
 
 TeamMemberFormset = inlineformset_factory(User, TeamMember, 

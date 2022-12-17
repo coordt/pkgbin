@@ -61,9 +61,9 @@ except ImportError:
     STATIC_ROOT = os.path.join(MEDIA_ROOT_PREFIX, 'static')
 
 
-MEDIA_URL = '%suploads/' % MEDIA_URL_PREFIX
-STATIC_URL = "%sstatic/" % MEDIA_URL_PREFIX
-ADMIN_MEDIA_PREFIX = "%sadmin/" % STATIC_URL
+MEDIA_URL = f'{MEDIA_URL_PREFIX}uploads/'
+STATIC_URL = f"{MEDIA_URL_PREFIX}static/"
+ADMIN_MEDIA_PREFIX = f"{STATIC_URL}admin/"
 
 STATICFILES_DIRS = (
     os.path.join(PROJECT_ROOT, 'static'),
@@ -166,7 +166,7 @@ INSTALLED_APPS = (
 ADMIN_TOOLS_THEMING_CSS = 'calloway/admin/css/theming.css'
 ADMIN_TOOLS_MENU = 'menu.CustomMenu'
 
-TINYMCE_JS_URL = '%scalloway/js/tiny_mce/tiny_mce.js' % STATIC_URL
+TINYMCE_JS_URL = f'{STATIC_URL}calloway/js/tiny_mce/tiny_mce.js'
 TINYMCE_JS_ROOT = os.path.join(STATIC_ROOT, 'js/tiny_mce')
 
 LOGIN_REDIRECT_URL = '/accounts/%(username)s/'
@@ -176,7 +176,7 @@ LOGOUT_URL = '/accounts/signout/'
 DJANGOPYPI_SETTINGS = {
     'PROXY_MISSING': True,
     'RELEASE_FILE_STORAGE': 'media_storage.QueuedUserCloudFilesStorage',
-    'RELEASE_UPLOAD_TO': lambda x,y: "%s/%s" % (x.release.package.owner.username, y)
+    'RELEASE_UPLOAD_TO': lambda x, y: f"{x.release.package.owner.username}/{y}",
 }
 
 #######################

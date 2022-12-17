@@ -9,18 +9,18 @@ class Command(BaseCommand):
         import cloudfiles
         from cloudfiles.errors import NoSuchContainer
         from cumulus import settings
-        
+
         for username in args:
             
             container_name = username
             conn = cloudfiles.get_connection(
                             username=settings.CUMULUS['USERNAME'],
                             api_key=settings.CUMULUS['API_KEY'])
-            
+
             try:
                 container = conn.get_container(container_name)
-                self.stdout.write("Container for %s already exists." % username)
+                self.stdout.write(f"Container for {username} already exists.")
             except NoSuchContainer:
                 container = conn.create_container(container_name)
                 container.make_public()
-                self.stdout.write("Successfully created container for %s." % username)
+                self.stdout.write(f"Successfully created container for {username}.")

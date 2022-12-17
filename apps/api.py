@@ -32,12 +32,12 @@ class UserResource(ModelResource):
 
         Uses the model's ``username`` in order to create the URI.
         """
-        kwargs = {'resource_name': self._meta.resource_name,}
-
-        if isinstance(bundle_or_obj, Bundle):
-            kwargs['username'] = bundle_or_obj.obj.username
-        else:
-            kwargs['username'] = bundle_or_obj.username
+        kwargs = {
+            'resource_name': self._meta.resource_name,
+            'username': bundle_or_obj.obj.username
+            if isinstance(bundle_or_obj, Bundle)
+            else bundle_or_obj.username,
+        }
 
         if self._meta.api_name is not None:
             kwargs['api_name'] = self._meta.api_name

@@ -24,7 +24,7 @@ class TeamMember(models.Model):
     creator = models.BooleanField(default=False)
     
     def __unicode__(self):
-        return "%s on team %s" % (self.user.username, self.team.username)
+        return f"{self.user.username} on team {self.team.username}"
     
     def save(self, *args, **kwargs):
         """
